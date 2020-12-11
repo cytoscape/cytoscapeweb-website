@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html>
+    <head>
+            
+        <title>Cytoscape Web &#187; Documentation &#187; Elements</title>
+        
+        <link rel="shortcut icon" href="../../img/layout/favicon.png" />
+        <meta name="keywords" content="Cytoscape, Cytoscape Web, visualization, interaction network, graph, bioinformatics, computational biology, pathways">
+        
+        
+        <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+<link rel="stylesheet" type="text/css" href="../../css/content.css" />
+<link rel="stylesheet" type="text/css" href="../../css/content/documentation.css" />
+        
+        <!--[if IE]>
+                <![endif]-->
+        
+        <script type="text/javascript" src="../../js/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../../js/jquery/plugins/jquery.qtip-1.0.0-rc3.min.js"></script>
+<script type="text/javascript" src="../../js/layout/layout.js"></script>
+<script type="text/javascript" src="../../js/jquery/plugins/chili/jquery.chili-2.2.js"></script>
+<script type="text/javascript" src="../../js/jquery/plugins/chili/recipes.js"></script>
+<script type="text/javascript" src="../../js/layout/side.js"></script>
+<script type="text/javascript" src="../../js/content/documentation.js"></script>
+<script type="text/javascript" src="../../js/util/ga.js"></script>
+        
+        <!--[if IE]>
+                <![endif]-->
+
+        
+        	</head>
+	
+    <body>
+	
+        <div id="header" class="slice">
+            <a href="../../index.html" title="Home"><div id="logo">Cytoscape Web</div></a>
+            
+            <div id="navigation_links">
+                <ul>
+                    <li><a href="../../download">Download</a></li>
+<li><a href="../../tutorial">Tutorial</a></li>
+<li><a href="../../faq">FAQ</a></li>
+<li class="selected" ><a href="../../documentation">Documentation</a></li>
+<li><a href="../../demos">Demos</a></li>
+<li><a href="../../about">About</a></li>
+<li><a href="../../contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <form action="http://www.google.com/cse" id="cse-search-box">
+                <input type="hidden" name="cx" value="016016542103382164689:dyea8plfovk" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <div id="search">
+                        <div id="search_input">
+                            <input type="text" name="q" size="25" value="Search this site via Google" />
+                        </div>
+                        <button id="search_button" name="sa"></button>
+                </div>
+            </form>
+            
+        </div>
+		  
+        <div id="page" class="slice">
+            
+            <div id="cytoscapejs_note" class="slice">
+                <p>
+                    <img class="cytoscapejs_note_icon1" src="../../img/icons/triangle38.png"></img>
+                    <img class="cytoscapejs_note_icon2" src="../../img/icons/triangle38.png"></img>
+                    This project has been replaced by <strong><a href="http://js.cytoscape.org">Cytoscape.js</a></strong>, 
+                    and is no longer active.
+                </p>
+            </div>
+            
+            <div id="page_navigation">
+                <ul>
+                    <li class="selected"><a href="../elements">Elements</a></li>
+                    <li><a href="../events">Events</a></li>
+                    <li><a href="../layout">Layout</a></li>
+                    <li><a href="../mappers">Mappers</a></li>
+                    <li><a href="../schema">Schema</a></li>
+                    <li><a href="../shapes">Shapes</a></li>
+                    <li><a href="../visual_style">Visual style</a></li>
+                    <li><a href="../visualization">Visualization</a></li>
+                </ul>
+            </div>
+                        
+            <!-- begin page content -->
+            <div id="content" class="side">
+            
+            <div class="right"><div class="nav"></div></div><div class="left api">
+    <h1 id="NetworkModel" name="NetworkModel">NetworkModel</h1><div class="description"><p>This object represents a NetworkModel type, but is actually just an untyped object.</p>
+<p>It defines the raw data (nodes and edges data values) and the data schema for a network.
+It is important to notice that the network model does <b>not</b> contain <a class="class_link direct" href="elements#section/Node">Node</a> and <a class="class_link direct" href="elements#section/Edge">Edge</a> objects, 
+as it is not supposed to describe visual attributes such as colors, shapes and x/y coordinates.
+Visual styles must be defined separately, through <a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a> or <a class="class_link" href="visual_style#section/VisualStyleBypass">VisualStyleBypass</a>.
+Nodes positioning are done by <a class="class_link" href="layout#section/Layout">Layout</a> objects.</p>
+<p>A NetworkModel object has only two fields:</p>
+<ul class="options">
+    <li><code>dataSchema</code> {<a class="class_link" href="schema#section/DataSchema">DataSchema</a>}: It defines the nodes/edges data fields.
+                                You do not need to specify these essential fields: 
+                                <code>id</code> (nodes or edges), <code>source</code> (edges), <code>target</code> (edges), <code>directed</code> (edges).
+                                Actually, trying to modify these fields in the schema might throw an <a class="class_link" href="events#section/Error">Error</a>.</li>
+    <li><code>data</code> {Object}: The actual nodes/edges data values used to create <a class="class_link direct" href="elements#section/Node">Node</a> and <a class="class_link direct" href="elements#section/Edge">Edge</a> elements.
+                                    It contains two fields (<code>nodes</code> and <code>edges</code>), which are arrays of nodes/edges data objects.
+                                    Note: data attributes of type <code>int</code> or <code>boolean</code> (see <a class="class_link" href="schema#section/DataField">DataField</a>) 
+                                    do NOT accept <code>null</code> values.</li>
+</ul></div><div class="details"><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var network = {
+
+    dataSchema: {
+        nodes: [ { name: "label", type: "string" },
+                 { name: "score", type: "number" } ],
+                 
+        edges: [ { name: "label", type: "string" },
+                 { name: "weight", type: "number" },
+                 { name: "directed", type: "boolean", defValue: true} ]
+    },
+    
+    data: {
+        nodes: [ { id: "n1", label: "Node 1", score: 1.0 },
+                 { id: "n2", label: "Node 2", score: 2.2 },
+                 { id: "n3", label: "Node 3", score: 3.5 } ],
+                 
+        edges: [ { id: "e1", label: "Edge 1", weight: 1.1, source: "n1", target: "n3" },
+                 { id: "e2", label: "Edge 2", weight: 3.3, source:"n2", target:"n1"} ]
+    }
+};</code></pre></div><label>See Also</label><ul class="see_also"><li><a href="visualization#section/draw">org.cytoscapeweb.Visualization :: draw</a></li><li><a href="visualization#section/networkModel">org.cytoscapeweb.Visualization :: networkModel</a></li><li><a href="visualization#section/dataSchema">org.cytoscapeweb.Visualization :: dataSchema</a></li><li><a class="class_link" href="schema#section/DataSchema">DataSchema</a></li></ul></div><h1 id="Edge" name="Edge">Edge</h1><div class="description"><p>This object represents an Edge type, but is just an untyped object.</p>
+<p>So never do:</p>
+<p><code>var edge = new org.cytoscapeweb.Edge(); // Wrong!!!</code></p>
+<p>In order to create an edge, just create an object with the expected fields.
+Notice that the attribute <code>group</code> must always be <code>"edges"</code>, 
+because that is what really defines this type.</p></div><div class="details"><label>Fields</label><div class="fields"><div class="field"><p><em>color</em> <span class="type">{String}</span> : The edge color, in hexadecimal code (e.g. <code>"#666666"</code>).</p></div><div class="field"><p><em>curvature</em> <span class="type">{Number}</span> : The value that defines the curvature rate of curved edges. Higher values create more curved edges.</p></div><div class="field"><p><em>data</em> <span class="type">{Object}</span> : The object that stores the custom edge attributes.
+It should have at least the following properties:
+<ul class="options">
+    <li><code>id</code> {String}: the edge id.</li>
+    <li><code>source</code> {String}: the source node id.</li>
+    <li><code>target</code> {String}: the target node id.</li>
+    <li><code>directed</code> {Boolean}: a directed edge has a default arrow pointed to the target node.</li></ul>
+When the network was created from a SIF data format, the edge's data object will also have the <code>interaction</code>
+attribute (String type).</p></div><div class="field"><p><em>edges</em> <span class="type">{Array}</span> : If the edge is a merged one, this property provides the regular parallel edges that were merged together.
+If the edge is already a regular non-merged type, this property is undefined.</p></div><div class="field"><p><em>group</em> <span class="type">{<a class="class_link direct" href="elements#section/Group">Group</a>}</span> : The group name that defines this Data type (always <code>"edges"</code>).</p></div><div class="field"><p><em>merged</em> <span class="type">{Boolean}</span> : Indicate whether or not the edge is a merged one. Merged edges are used to simplify the 
+network visualization by just showing that two nodes are connected to each other, without 
+displaying all the real edges that link them together.</p></div><div class="field"><p><em>opacity</em> <span class="type">{Number}</span> : The edge opacity, from <code>0</code> to <code>1.0</code> (100% opaque).</p></div><div class="field"><p><em>sourceArrowColor</em> <span class="type">{String}</span> : The color code of the source arrow.</p></div><div class="field"><p><em>sourceArrowShape</em> <span class="type">{<a class="class_link" href="shapes#section/ArrowShape">ArrowShape</a>}</span> : The shape name of the edge's source arrow.</p></div><div class="field"><p><em>targetArrowColor</em> <span class="type">{String}</span> : The color code of the target arrow.</p></div><div class="field"><p><em>targetArrowShape</em> <span class="type">{<a class="class_link" href="shapes#section/ArrowShape">ArrowShape</a>}</span> : The shape name of the edge's target arrow.</p></div><div class="field"><p><em>visible</em> <span class="type">{Boolean}</span> : A boolean value that indicates whether or not the edge is set to visible.</p></div><div class="field"><p><em>width</em> <span class="type">{Number}</span> : The edge line width, in pixels.</p></div><div class="field"><p><em>zIndex</em> <span class="type">{Number}</span> : The stacking order of the element.</p></div></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var edge = {
+    group: "edges",
+    merged: false,
+    opacity: 0.8,
+    color: "333333",
+    width: 2,
+    // etc...
+    data: {
+        id: 1,
+        source: 1,
+        target: 3,
+        weight: 0.5
+    }
+};</code></pre></div></div><h1 id="Node" name="Node">Node</h1><div class="description"><p>This object represents a Node type, but is actually just an untyped object.</p>
+<p>So never do:</p>
+<p><code>var node = new org.cytoscapeweb.Node(); // Wrong!!!</code></p>
+<p>In order to create a node, just create an object with the expected fields.
+Notice that the attribute <code>group</code> must always be <code>"nodes"</code>, 
+because that is what really defines this type.</p></div><div class="details"><label>Fields</label><div class="fields"><div class="field"><p><em>borderColor</em> <span class="type">{String}</span> : The border color, in hexadecimal code (e.g. <code>"#000000"</code>).</p></div><div class="field"><p><em>borderWidth</em> <span class="type">{Number}</span> : The border width, in pixels.</p></div><div class="field"><p><em>color</em> <span class="type">{String}</span> : The node fill color, in hexadecimal code (e.g. <code>"#ff3333"</code>).</p></div><div class="field"><p><em>data</em> <span class="type">{Object}</span> : The object that stores the custom node attributes.
+It should have at least the <code>id</code> property.</p></div><div class="field"><p><em>group</em> <span class="type">{<a class="class_link direct" href="elements#section/Group">Group</a>}</span> : The group name that defines this Data type (always <code>"nodes"</code>).</p></div><div class="field"><p><em>height</em> <span class="type">{Number}</span> : The absolute node height (in pixels), when the zoom level is 100%.
+This value is not scaled, so if you want the real rendered height, you need to multiply
+this value by the current network scale, which is provided by <a href="visualization#section/zoom">org.cytoscapeweb.Visualization :: zoom</a>.</p></div><div class="field"><p><em>nodesCount</em> <span class="type">{Number}</span> : The number of child nodes.</p></div><div class="field"><p><em>opacity</em> <span class="type">{Number}</span> : The node opacity, from <code>0</code> to <code>1.0</code> (100% opaque).</p></div><div class="field"><p><em>shape</em> <span class="type">{<a class="class_link" href="shapes#section/NodeShape">NodeShape</a>}</span> : The shape name.</p></div><div class="field"><p><em>size</em> <span class="type">{Number}</span> : The absolute node size (in pixels), when the zoom level is 100%. It is the highest value of height and width.
+Notice that this value is not scaled, so if you want the real visualized size, you need to multiply
+this value by the current network scale, which is provided by <a href="visualization#section/zoom">org.cytoscapeweb.Visualization :: zoom</a>.
+If you set the size to <code>"auto"</code>, the node will be automatically resized to enclose its label text.</p></div><div class="field"><p><em>visible</em> <span class="type">{Boolean}</span> : A boolean value that indicates whether or not the node is set to visible.</p></div><div class="field"><p><em>width</em> <span class="type">{Number}</span> : The absolute node width (in pixels), when the zoom level is 100%.
+This value is not scaled, so if you want the real rendered width, you need to multiply
+this value by the current network scale, which is provided by <a href="visualization#section/zoom">org.cytoscapeweb.Visualization :: zoom</a>.</p></div><div class="field"><p><em>x</em> <span class="type">{Number}</span> : The x coordinate value that indicates where the center of the node is positioned in
+the horizontal axis of the Visualization rectangle.
+If <code>x == 0</code>, the middle point of the node is located exactly at the left border of the network view.</p></div><div class="field"><p><em>y</em> <span class="type">{Number}</span> : The y coordinate value that indicates where the center of the node is positioned in
+the vertical axis of the Visualization rectangle.
+If <code>y == 0</code>, the middle point of the node is located exactly at the top border of the network view.</p></div><div class="field"><p><em>zIndex</em> <span class="type">{Number}</span> : The stacking order of the element.</p></div></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var node = {
+    group: "nodes",
+    shape: "TRIANGLE",
+    size: 20,
+    color: "0000ff",
+    // etc...
+    data: {
+        id: 1
+    }
+};</code></pre></div></div><h1 id="Group" name="Group">Group</h1><div class="description"><p>This object represents a Group type. In actuality, it is a string.</p>
+<p>However, its value must be one of:</p>
+<ul class="options"><li><code>nodes</code></li><li><code>edges</code></li><li><code>none</code> (same as <code>null</code>)</li></ul></div><div class="details"></div></div>
+
+
+	        </div>
+	        <!-- end page content -->
+        </div> 
+	
+        <div id="footer" class="slice">
+            <p>
+                Cytoscape Web development is funded by <a href="http://www.genomecanada.ca">Genome Canada</a>, through the
+                <a href="http://www.ontariogenomics.ca/">Ontario Genomics Institute</a> (2007-OGI-TD-05).</p>
+			<p>
+				Funding for <a href="http://www.cytoscape.org">Cytoscape</a> is provided by a federal grant from the U.S. 
+				<a href="http://www.nigms.nih.gov">National Institute of General Medical Sciences (NIGMS)</a> 
+				of the <a href="http://www.nih.gov">National Institutes of Health (NIH)</a> under award 
+				number GM070743-01 and the U.S. <a href="http://www.nsf.gov">National Science Foundation (NSF)</a>.
+			</p>
+			<p>
+		  		<a href="http://www.systemsbiology.org"> ISB </a> | 
+		  		<a href="http://www.ucsd.edu"> UCSD </a> | 
+		  		<a href="http://cbio.mskcc.org"> MSKCC </a> | 
+		  		<a href="http://www.pasteur.fr"> Pasteur </a> | 
+		  		<a href="http://www.agilent.com/"> Agilent </a> | 
+		  		<a href="http://www.ucsf.edu/"> UCSF </a> |
+				<a href="http://www.unilever.com"> Unilever </a> |
+				<a href="http://www.utoronto.ca"> Toronto </a> |
+				<a href="http://portal.ncibi.org/gateway/index.html"> NCIBI </a>
+		  	</p>
+
+			<p>
+				&copy; 
+	            2009&ndash;2020            	Cytoscape Consortium
+        	</p>
+        </div>
+
+    </body>
+
+</html>

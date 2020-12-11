@@ -1,0 +1,798 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html>
+    <head>
+            
+        <title>Cytoscape Web &#187; Documentation &#187; Visualization</title>
+        
+        <link rel="shortcut icon" href="../img/layout/favicon.png" />
+        <meta name="keywords" content="Cytoscape, Cytoscape Web, visualization, interaction network, graph, bioinformatics, computational biology, pathways">
+        
+        
+        <link rel="stylesheet" type="text/css" href="../css/layout.css" />
+<link rel="stylesheet" type="text/css" href="../css/content.css" />
+<link rel="stylesheet" type="text/css" href="../css/content/documentation.css" />
+        
+        <!--[if IE]>
+                <![endif]-->
+        
+        <script type="text/javascript" src="../js/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery/plugins/jquery.qtip-1.0.0-rc3.min.js"></script>
+<script type="text/javascript" src="../js/layout/layout.js"></script>
+<script type="text/javascript" src="../js/jquery/plugins/chili/jquery.chili-2.2.js"></script>
+<script type="text/javascript" src="../js/jquery/plugins/chili/recipes.js"></script>
+<script type="text/javascript" src="../js/layout/side.js"></script>
+<script type="text/javascript" src="../js/content/documentation.js"></script>
+<script type="text/javascript" src="../js/util/ga.js"></script>
+        
+        <!--[if IE]>
+                <![endif]-->
+
+        
+        	</head>
+	
+    <body>
+	
+        <div id="header" class="slice">
+            <a href="../index.html" title="Home"><div id="logo">Cytoscape Web</div></a>
+            
+            <div id="navigation_links">
+                <ul>
+                    <li><a href="../download">Download</a></li>
+<li><a href="../tutorial">Tutorial</a></li>
+<li><a href="../faq">FAQ</a></li>
+<li class="selected" ><a href="../documentation">Documentation</a></li>
+<li><a href="../demos">Demos</a></li>
+<li><a href="../about">About</a></li>
+<li><a href="../contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <form action="http://www.google.com/cse" id="cse-search-box">
+                <input type="hidden" name="cx" value="016016542103382164689:dyea8plfovk" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <div id="search">
+                        <div id="search_input">
+                            <input type="text" name="q" size="25" value="Search this site via Google" />
+                        </div>
+                        <button id="search_button" name="sa"></button>
+                </div>
+            </form>
+            
+        </div>
+		  
+        <div id="page" class="slice">
+            
+            <div id="cytoscapejs_note" class="slice">
+                <p>
+                    <img class="cytoscapejs_note_icon1" src="../img/icons/triangle38.png"></img>
+                    <img class="cytoscapejs_note_icon2" src="../img/icons/triangle38.png"></img>
+                    This project has been replaced by <strong><a href="http://js.cytoscape.org">Cytoscape.js</a></strong>, 
+                    and is no longer active.
+                </p>
+            </div>
+            
+                        <div id="page_navigation">
+                <ul>
+                    <li><a href="elements">Elements</a></li> <li><a href="events">Events</a></li> <li><a href="layout">Layout</a></li> <li><a href="mappers">Mappers</a></li> <li><a href="schema">Schema</a></li> <li><a href="shapes">Shapes</a></li> <li><a href="visual_style">Visual style</a></li> <li class="selected" ><a href="visualization">Visualization</a></li>                    </ul>
+            </div>
+                        
+            <!-- begin page content -->
+            <div id="content" class="side">
+            
+            <div class="right"><div class="nav"></div></div><div class="left api">
+    <h1 id="org.cytoscapeweb.Visualization" name="org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization<span class="arguments">&nbsp;( containerId, [&nbsp;options&nbsp;]&nbsp;)</span></h1><div class="description"><p>Initialise Cytoscape Web. It does not draw the network yet.</p>
+<p>The <a class="function_link direct" href="visualization#section/draw">draw</a> method must be called when 
+you want the network to be displayed.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>containerId</em> <span class="type">{String}</span> : The id of the HTML element (containing your alternative content)
+                            you would like to have replaced by the Flash object.</p></div><div class="parameter"><p>[ <em>options</em> ] <span class="type">{Object}</span> : Cytoscape Web parameters:
+               <ul class="options">
+                   <li><code>swfPath</code>: The path of the compiled Cytoscape Web SWF file, but without the
+                                             <code>.swf</code> extension. If you use the provided <code>CytoscapeWeb.swf</code>
+                                             file and put it in the root path of the web application, this option does not need
+                                             to be specified. But, for example, if you deploy the swf file at <code>/plugin/flash</code>,
+                                             the <code>swfPath</code> value must be "/plugin/flash/CytoscapeWeb".</li>
+                   <li><code>flashInstallerPath</code>: The path to the compiled Flash video that should be displayed in case
+                                                        the browser does not have the Flash Player version required by Cytoscape Web.
+                                                        The default value is "playerProductInstall" and, if this option is not changed,
+                                                        the <code>playerProductInstall.swf</code> file must be deployed in the
+                                                        web site's root path. Otherwise, just specify the new path without the
+                                                        <code>.swf</code> extension.</li>
+                   <li><code>flashAlternateContent</code>: The text message that should be displayed if the browser does not have
+                                                           the Flash Player plugin. If none is provided, Cytoscape Web will show
+                                                           a default message and a link to the "Get Flash" page.</li>
+                   <li><code>resourceBundleUrl</code>: An optional resource bundle path. Usually a <code>.properties</code> file
+                                                       that redefines the default labels and messages used by Cytoscape Web.
+                                                       Example of a valid file with all the available keys:
+<pre>
+global.wait = Please wait...
+error.title = Error
+pan.tooltip = Grab to pan
+pan.up.tooltip = Pan up
+pan.down.tooltip = Pan down
+pan.left.tooltip = Pan left
+pan.right.tooltip = Pan right
+zoom.out.tooltip = Zoom out
+zoom.in.tooltip = Zoom in
+zoom.fit.tooltip = Fit to screen
+zoom.slider.tooltip = {0}%
+</pre></li>
+                   <li><code>idToken</code>: A string used to create the embedded Flash video id
+                                             (usually an HTML <code>embed</code> or <code>object</code> tag).
+                                             The default token is "cytoscapeWeb" and the final id will be the token followed
+                                             by a number, so if the application has two instances of the Visualization in the same page,
+                                             their id's will be "cytoscapeWeb1" and "cytoscapeWeb2".
+                                             This token does not usually need to be changed.</li>
+                   <li><code>mouseDownToDragDelay</code>: If the user clicks (mouse-down) the background and hold if for a while,
+                                                          Cytoscape Web temporarily changes to grab-to-pan mode, so the user can drag the whole network.
+                                                          If the user do the same over a node, the grab-to-pan mode can be activated as well,
+                                                          but dragging the node will drag the node's disconnected component only,
+                                                          not necessarily the whole network--if there are other disconnected parts, they will not be dragged.
+                                                          This parameter lets you set the time (in milliseconds) Cytoscape Web should wait before changing modes.
+                                                          The default value is <code>400</code>.
+                                                          If this parameter is set to <code>-1</code>, Cytoscape Web will never activate the grab-to-pan mode
+                                                          automatically, but users can still use the grab-to-pan option from the pan-zoom control.</li>
+               </ul></p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="html">&lt;html&gt;
+&lt;head&gt; &lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Sample&lt;/h1&gt;
+&lt;div id="cytoWebContent" style="width: 600px;height: 400px;"&gt;&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+    var options = { swfPath: "path/to/swf/CytoscapeWeb",
+                    flashInstallerPath: "path/to/swf/playerProductInstall",
+                    flashAlternateContent: "Le Flash Player est n&eacute;cessaire." };
+                    
+    var vis = new org.cytoscapeweb.Visualization("cytoWebContent", options);
+    
+    vis.draw({ network: '&lt;graphml&gt;...&lt;/graphml&gt;' });
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;html&gt;</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/draw">draw</a></li><li><a class="function_link direct" href="visualization#section/ready">ready</a></li></ul></div><h1 id="addContextMenuItem" name="addContextMenuItem">addContextMenuItem<span class="arguments">&nbsp;( lbl, [&nbsp;gr&nbsp;], fn&nbsp;)</span></h1><div class="description"><p>Adds a custom menu item to the right-click context menu.</p>
+<p>This method can only be used after a network has been drawn, so it is better to use it after the
+<code>ready</code> callback function is called (see <a class="function_link direct" href="visualization#section/ready">ready</a>).</p>
+<p>If an item with the same label has already been set to the same group, it will not add another
+callback function to that menu item. In that case, the previous function will be replaced by
+the new one and only one menu item will be displayed.</p>
+<p>It is possible to add more than one menu item with the same label, but only if they are added to
+different groups.</p>
+<p><b>Important:</b> Since the context menu is rendered by Flash, be aware of these 
+<a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/ui/ContextMenuItem.html" rel="external">restrictions</a>.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>lbl</em> <span class="type">{String}</span> : The context menu item label to be displayed.</p></div><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements the menu item will be assigned to.
+                                      If <code>"nodes"</code>, the menu item will be visible only on right-clicks
+                                      when the cursor is over a node. If <code>"edges"</code>, only when its over an edge.
+                                      If <code>"none"</code> or no group is provided, the menu item will be available after a right-click
+                                      over any network element, including the canvas background.</p></div><div class="parameter"><p><em>fn</em> <span class="type">{Function}</span> : The callback function that is invoked after the user selects the injected menu item.
+                     That function always receives an event object as argument. The event type is always <code>"contextmenu"</code>.
+                     If the context menu was added to the <code>nodes</code> or <code>edges</code> group, you might want to
+                     get the right-clicked node or edge object by using the event's <code>target</code> property.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// We will use the context menu to select the first neighbors of the
+// right-clicked node.
+
+// 1. Assuming that you have created a visualization object:
+var vis = new org.cytoscapeweb.Visualization("container-id");
+
+// 2. Add a context menu item any time after the network is ready:
+vis.ready(function () {
+    vis.addContextMenuItem("Select first neighbors", "nodes", 
+        function (evt) {
+            // Get the right-clicked node:
+            var rootNode = evt.target;
+        
+            // Get the first neighbors of that node:
+            var fNeighbors = vis.firstNeighbors([rootNode]);
+            var neighborNodes = fNeighbors.neighbors;
+        
+            // Select the root node and its neighbors:
+            vis.select([rootNode]).select(neighborNodes);
+        }
+    );
+});</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeContextMenuItem">removeContextMenuItem</a></li><li><a class="function_link direct" href="visualization#section/removeAllContextMenuItems">removeAllContextMenuItems</a></li></ul></div><h1 id="addDataField" name="addDataField">addDataField<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], dataField&nbsp;)</span></h1><div class="description"><p>Add a custom attribute definition to the current node or edge data schema.</p>
+<p>If an attribute with the same name is already defined for the same group,
+the attribute will not be added again or replace the previous definitions.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements. If no group is passed,
+                                     Cytoscape Web will try to add the new field to both nodes and edges data schema.</p></div><div class="parameter"><p><em>dataField</em> <span class="type">{<a class="class_link" href="schema#section/DataField">DataField</a>}</span> : An object that contains the attribute definitions.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1: Add the same new field to nodes and edges data:
+var field = { name: "url", type: "string", defValue: "http://cytoscapeweb.cytoscape.org/" };
+vis.addDataField(field);
+
+// 2: Add new field to nodes only:
+var field = { name: "score", type: "number", defValue: 0.15 };
+vis.addDataField("nodes", field);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeDataField">removeDataField</a></li><li><a class="function_link direct" href="visualization#section/updateData">updateData</a></li><li><a class="function_link direct" href="visualization#section/dataSchema">dataSchema</a></li></ul></div><h1 id="addEdge" name="addEdge">addEdge<span class="arguments">&nbsp;( data, [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Create a new edge linking two nodes and add it to the network view.<p>
+<p>If the edge <code>id</code> is not specified, Cytoscape Web creates a new one automatically.</p>
+<p>However the <code>source</code> and <code>target</code> data fields are mandatory, and Cytoscape Web 
+throws an error if any of them is missing.</p>
+<p>If the data contains attributes that have not been previously defined in the <a class="class_link" href="schema#section/DataSchema">DataSchema</a>,
+Cytoscape Web will throw an error. To prevent that, just add the new fields to the schema first, 
+by calling <a class="function_link direct" href="visualization#section/addDataField">addDataField</a>.</p>
+<p>You might also want to take a look at <a class="function_link direct" href="visualization#section/addElements">addElements</a>, which is much faster
+when adding more than one element at once.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>data</em> <span class="type">{Object}</span> : The object that contains the edge attributes.</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to update and reapply the visual mappers
+                                       to the network view after adding the edge.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link" href="elements#section/Edge">Edge</a>} The new created edge object.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var data = { id: "e10",
+             source: "n1",
+             target: "n4",
+             directed: false,
+             label: "Co-expression",
+             weight: 0.88 };
+
+var edge = vis.addEdge(data, true);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addNode">addNode</a></li><li><a class="function_link direct" href="visualization#section/addElements">addElements</a></li><li><a class="function_link direct" href="visualization#section/removeElements">removeElements</a></li></ul></div><h1 id="addElements" name="addElements">addElements<span class="arguments">&nbsp;( [&nbsp;items&nbsp;], [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Add new nodes and/or edges to the network.</p>
+<p>The rules described in <a class="function_link direct" href="visualization#section/addNode">addNode</a> and <a class="function_link direct" href="visualization#section/addEdge">addEdge</a>
+are still valid here.</p>
+<p>You can add nodes and edges together and, when doing so, the order of the elements in
+the array do not matter, because Cytoscape Web will first add all the nodes, and then
+the edges.</p>
+<p>The new element must have a <code>group</code> field set to either <code>"nodes"</code> or <code>"edges"</code>,
+because <a class="class_link" href="elements#section/Node">Node</a> and <a class="class_link" href="elements#section/Edge">Edge</a> objects are untype objects and Cytoscape Web
+has no other safe way of making the distinction between the two types.</p>
+<p>If the new elements contain visual properties (e.g. color, opacity), they are simply ignored and Cytoscape Web applies
+new visual property values according to the current <a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a> and <a class="class_link" href="visual_style#section/VisualStyleBypass">VisualStyleBypass</a>.
+The node positions (x, y), if specified, are respected, though.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>items</em> ] <span class="type">{Array}</span> : The nodes and edges to be added to the network.
+                       The array must contain <a class="class_link" href="elements#section/Node">Node</a> and/or <a class="class_link" href="elements#section/Edge">Edge</a> objects.</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to reapply the visual mappers
+                                       to the network view after removing the elements.</p></div><label>Return value</label><div class="return_value"><p>{Array} The new created elements (<a class="class_link" href="elements#section/Node">Node</a> and <a class="class_link" href="elements#section/Edge">Edge</a> objects).</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Add two nodes with no data (IDs will be created automatically):
+var nodesArray = [ { group: "nodes", x: 10, y: 35 },
+                   { group: "nodes", x: 20, y: 70 } ];
+var nodes = vis.addElements(nodesArray, true);
+
+// 2. Add edges and nodes altogether:
+var array = [ { group: "nodes", x: 10, y: 35, data: { id: "n01" } },
+              { group: "nodes", x: 20, y: 70, data: { id: "n02" } },
+              { group: "edges", data: { source: "n01", target: "n02" } } ];
+var elements = vis.addElements(array, true);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeElements">removeElements</a></li><li><a class="function_link direct" href="visualization#section/addNode">addNode</a></li><li><a class="function_link direct" href="visualization#section/addEdge">addEdge</a></li></ul></div><h1 id="addListener" name="addListener">addListener<span class="arguments">&nbsp;( evt, [&nbsp;gr&nbsp;], fn&nbsp;)</span></h1><div class="description"><p>Appends an event listener to the network.</p>
+<p>Listeners can be added or removed at any time, even before the graph is rendered, which means that you do not
+need to wait for the <a class="function_link direct" href="visualization#section/ready">ready</a> function to be called.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>evt</em> <span class="type">{<a class="class_link" href="events#section/EventType">EventType</a>}</span> : The event type.</p></div><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements to assign the listener to (optional for some events).</p></div><div class="parameter"><p><em>fn</em> <span class="type">{Function}</span> : The callback function the event invokes.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Create the visualization instance:
+var vis = new org.cytoscapeweb.Visualization("container-id");
+
+// 2. Add listeners at any time:
+vis.addListener("zoom", function(evt) {
+    var zoom = evt.value;
+    alert("New zoom value is " + (zoom * 100) + "%");
+})
+.addListener("click", "edges", function(evt) {
+    var edge = evt.target;
+    alert("Edge " + edge.data.id + " was clicked");
+})
+.addListener("select", "nodes", function(evt) {
+    var nodes = evt.target;
+    alert(nodes.length + " node(s) selected");
+});
+
+// 3. Draw the network:
+vis.draw({ network: '&lt;graphml&gt;...&lt;/graphml&gt;' });</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="class_link" href="events#section/Event">Event</a></li><li><a class="function_link direct" href="visualization#section/hasListener">hasListener</a></li><li><a class="function_link direct" href="visualization#section/removeListener">removeListener</a></li></ul></div><h1 id="addNode" name="addNode">addNode<span class="arguments">&nbsp;( x, y, [&nbsp;data&nbsp;], [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Create a new node and add it to the network view.<p>
+<p>You can also add a node as a child of another node, by setting the parent node ID to the "parent" data attribute.<p>
+<p>If the node <code>id</code> is not specified, Cytoscape Web creates a new one automatically.</p>
+<p>If the data contains attributes that have not been previously defined in the <a class="class_link" href="schema#section/DataSchema">DataSchema</a>,
+Cytoscape Web will throw an error. To prevent that, you simply add the new fields to the schema first, 
+by calling <a class="function_link direct" href="visualization#section/addDataField">addDataField</a>.</p>
+<p>Keep in mind that <a class="function_link direct" href="visualization#section/addElements">addElements</a> is much faster if you have to
+add more than one element at once.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>x</em> <span class="type">{Object}</span> : The horizontal coordinate of the node.</p></div><div class="parameter"><p><em>y</em> <span class="type">{Object}</span> : The vertical coordinate of the node.</p></div><div class="parameter"><p>[ <em>data</em> ] <span class="type">{Object}</span> : The object that contains the node attributes.</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to update and reapply the visual mappers
+                                       to the network view after adding the node.
+                                       The default value is <code>false</code>.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link" href="elements#section/Node">Node</a>} The new created node object.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Add a new node to the network (here we assume that the data fields for
+// "label" and "weight" already exists in the node schema):
+var data = { id: "n4",
+             label: "MYO2 (Yeast)",
+             weight: 0.54 };
+var node1 = vis.addNode(240, 360, data, true);
+
+// 2. Add a new node as a child of another (compound) node:
+var node2 = vis.addNode(node1.x, node1.y, { parent: "n4" }, true);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addEdge">addEdge</a></li><li><a class="function_link direct" href="visualization#section/addElements">addElements</a></li><li><a class="function_link direct" href="visualization#section/removeElements">removeElements</a></li></ul></div><h1 id="childNodes" name="childNodes">childNodes<span class="arguments">&nbsp;( parent&nbsp;)</span></h1><div class="description"><p>Get all nodes that belong to a compound node.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>parent</em> <span class="type">{Object}</span> : The parent node object or the parent ID (String).</p></div><label>Return value</label><div class="return_value"><p>{Array} List of <a class="class_link" href="elements#section/Node">Node</a> objects.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/edges">edges</a></li><li><a class="function_link direct" href="visualization#section/nodes">nodes</a></li><li><a class="function_link direct" href="visualization#section/parentNodes">parentNodes</a></li><li><a class="function_link direct" href="visualization#section/node">node</a></li></ul></div><h1 id="customCursorsEnabled" name="customCursorsEnabled">customCursorsEnabled<span class="arguments">&nbsp;( [&nbsp;enabled&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed in, it enables or disables custom mouse cursors, such as the hand icon used when panning the network.</p>
+<p>If no argument is passed in, it returns a boolean value indicating whether or not custom cursors are enabled.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>enabled</em> ] <span class="type">{Boolean}</span> : If <code>true</code>, custom (Flash) cursors can be used in some actions.
+                           If <code>false</code>, Cytoscape Web will never replace the operating system's cursors.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>customCursorsEnabled()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>panEnabled({Boolean})</code>.</li></ul></p></div></div><h1 id="dataSchema" name="dataSchema">dataSchema<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Get the network data schema, which contains all the nodes and edges data fields.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{<a class="class_link" href="schema#section/DataSchema">DataSchema</a>} The data schema object.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var schema = vis.dataSchema();
+var nodeFields = schema.nodes;
+var edgeFields = schema.edges;</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addDataField">addDataField</a></li><li><a class="function_link direct" href="visualization#section/removeDataField">removeDataField</a></li><li><a class="function_link direct" href="visualization#section/updateData">updateData</a></li></ul></div><h1 id="deselect" name="deselect">deselect<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], [&nbsp;items&nbsp;]&nbsp;)</span></h1><div class="description"><p>Deselect the indicated nodes and edges, if they are selected.</p>
+<p>The same method can also be used to deselect all nodes/edges.
+To do that, just omit the <code>items</code> argument and specify the group of elements to be deselected.</p>
+<p>If you send repeated or invalid elements, they will be ignored.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements.
+                                     If not specified, it will try to deselect elements from both <code>node</code>
+                                     and <code>edge</code> groups.</p></div><div class="parameter"><p>[ <em>items</em> ] <span class="type">{Array}</span> : The items to be deselected. The array can contain node/edge objects or only
+                       their <code>id</code> values. Notice however that, if you specify only the id
+                       and do not pass the group argument, and if an edge and a node have the same id value,
+                       both will be deselected.<br>
+                       If this argument is <code>null</code>, <code>undefined</code> 
+                       or omitted, it will deselect all selected items that belong to the indicated group.<br>
+                       If you send an empty array, no action will be performed.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// a) Deselect edges by id:
+var ids = [4,6,21];
+vis.deselect("edges", ids);
+
+// b) Deselect one edge only:
+// Notice that the group parameter ("edges") is optional here,
+// because it's sending an edge object and not only its id.
+var e = vis.selected("edges")[0]; // assuming there is at least one selected edge!
+vis.deselect([e]);
+
+// c) Deselect nodes and edges at the same time:
+var n = vis.selected("nodes")[0];
+var e = vis.selected("edges")[0];
+vis.deselect([n,e]);
+
+// d) Deselect all nodes:
+vis.deselect("nodes");
+
+// e) Deselect all edges:
+vis.deselect("edges");
+
+// f) Deselect all nodes and all edges:
+vis.deselect();</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/select">select</a></li><li><a class="function_link direct" href="visualization#section/selected">selected</a></li></ul></div><h1 id="draw" name="draw">draw<span class="arguments">&nbsp;( options&nbsp;)</span></h1><div class="description"><p>Start Cytoscape Web by drawing the network.
+At least the <code>network</code> option must be specified.</p>
+<p>Just remember that you probably want to register a callback function with <a class="function_link direct" href="visualization#section/ready">ready</a>
+before calling <code>draw()</code>.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>options</em> <span class="type">{Object}</span> : <ul class="options">
+                   <li><code>network</code>: The model that describes the network. Only this option is mandatory. It can be one of the following formats:
+                                             <ul><li><a class="class_link" href="elements#section/NetworkModel">NetworkModel</a>: A simple JavaScript object that defines the raw data from which to build a network.</li>
+                                                 <li><a href="http://graphml.graphdrawing.org/primer/graphml-primer.html" rel="external">GraphML</a>: An XML format for graphs.</li>
+                                                 <li><a href="http://cgi5.cs.rpi.edu/research/groups/pb/punin/public_html/XGMML/" rel="external">XGMML</a>: This XML format allows you to define
+                                                     visual properties (e.g. colors and shapes) and nodes positioning, if you want to,
+                                                     although using the <code>visualStyle</code> and <code>layout</code> options is usually better.</li>
+                                                 <li><a href="http://cytoscape.wodaklab.org/wiki/Cytoscape_User_Manual/Network_Formats/" rel="external">SIF</a>: A simpler text format
+                                                     that can be very useful if you do not need to set custom nodes/edges attributes.</li>
+                                             </ul></li>
+                   <li><code>visualStyle</code>: an optional <a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a> object to be applied on this network.</li>
+                   <li><code>layout</code>: an optional <a class="class_link" href="layout#section/Layout">Layout</a> object, or just the layout name.
+                                            The default is "ForceDirected", unless the network data is an 
+                                            <a href="http://cgi5.cs.rpi.edu/research/groups/pb/punin/public_html/XGMML/" rel="external">XGMML</a>, whose 
+                                            <code><a href="http://www.cs.rpi.edu/research/groups/pb/punin/public_html/XGMML/draft-xgmml-20010628.html#NodeE" rel="external">node</a></code>
+                                            elements contain
+                                            <code><a href="http://www.cs.rpi.edu/research/groups/pb/punin/public_html/XGMML/draft-xgmml-20010628.html#GLCPE" rel="external">graphics</a></code>
+                                            tags with defined <code>x</code> and <code>y</code> attributes. In that case, the "Preset" layout is applied by default.</li>
+                   <li><code>nodeLabelsVisible</code>: Boolean that defines whether or not the node labels will be visible.
+                                                       The default value is <code>true</code>.
+                                                       You can call <a class="function_link direct" href="visualization#section/nodeLabelsVisible">nodeLabelsVisible</a> 
+                                                       later (after the network is ready) to change it.</li>
+                   <li><code>edgeLabelsVisible</code>: Boolean that defines whether or not the edge labels will be visible.
+                                                       The default value is <code>false</code>.
+                                                       You can use <a class="function_link direct" href="visualization#section/edgeLabelsVisible">edgeLabelsVisible</a> later to change it.</li>
+                   <li><code>nodeTooltipsEnabled</code>: Boolean value that enables or disables the node tooltips.
+                                                         The default value is <code>true</code>.
+                                                         You can call <a class="function_link direct" href="visualization#section/nodeTooltipsEnabled">nodeTooltipsEnabled</a> later to change it.</li>
+                   <li><code>edgeTooltipsEnabled</code>: Boolean that enables or disables the edge tooltips.
+                                                         The default value is <code>true</code>.
+                                                         You can use <a class="function_link direct" href="visualization#section/edgeTooltipsEnabled">edgeTooltipsEnabled</a> later to change it.</li>
+                   <li><code>edgesMerged</code>: Boolean that defines whether or not the network will be initially
+                                                 rendered with merged edges. The default value is <code>false</code>.
+                                                 You can call <a class="function_link direct" href="visualization#section/edgesMerged">edgesMerged</a> after the network is ready to change it.</li>
+                   <li><code>panZoomControlVisible</code>: Boolean value that sets whether or not the built-in control
+                                                           will be visible. The default value is <code>true</code>.
+                                                           The visibility of the control can be changed later with
+                                                           <a class="function_link direct" href="visualization#section/panZoomControlVisible">panZoomControlVisible</a>.</li>
+                   <li><code>panZoomControlPosition</code>: String value that sets the initial position of the built-in control.
+                                                            The allowed values are:
+                                                            <ul><li><code>topLeft</code></li>
+                                                                <li><code>topCenter</code></li>
+                                                                <li><code>topRight</code></li>
+                                                                <li><code>middleLeft</code></li>
+                                                                <li><code>middleCenter</code></li>
+                                                                <li><code>middleRight</code></li>
+                                                                <li><code>bottomLeft</code></li>
+                                                                <li><code>bottomCenter</code></li>
+                                                                <li><code>bottomRight</code></li></ul>
+                                                            The default value is <code>"bottomRight"</code>.</li>
+                   <li><code>preloadImages</code>: Boolean that defines whether or not to load all images before rendering the network.
+                                                   If <code>true</code>, all images from a 
+                                                   <a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a> or <a class="class_link" href="visual_style#section/VisualStyleBypass">VisualStyleBypass</a>
+                                                   will be loaded before the network is drawn or before a visual style (or bypass) is applied.
+                                                   The default value is <code>true</code>.</li>
+               </ul></p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var vis = new org.cytoscapeweb.Visualization("container-id");
+vis.draw({ network: '&lt;graphml&gt;...&lt;/graphml&gt;',
+           edgeLabelsVisible: false,
+           layout: 'Circle',
+           panZoomControlPosition: 'bottomLeft',
+           visualStyle: {
+               global: {
+                   backgroundColor: "#000033",
+                   nodeSelectionColor: "#ffce81"
+               },
+               nodes: {
+                   shape: "diamond"
+               },
+               edges: {
+                   width: 2
+               }
+           }
+        });</code></pre><pre class="example ln-"><code class="js">var vis = new org.cytoscapeweb.Visualization("container-id");
+vis.ready(function () {
+    // Start interaction with the network here...
+});
+vis.draw({ network: '&lt;graphml&gt;...&lt;/graphml&gt;' });</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/ready">ready</a></li><li><a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a></li><li><a class="class_link" href="layout#section/Layout">Layout</a></li></ul></div><h1 id="edge" name="edge">edge<span class="arguments">&nbsp;( id&nbsp;)</span></h1><div class="description"><p>Get one edge, including any merged edge, by its unique ID.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>id</em> <span class="type">{String}</span> : The edge id.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link" href="elements#section/Edge">Edge</a>} The edge object or <code>null</code>, if there is no edge with the specified id.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var edge = vis.edge("e10");</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/node">node</a></li><li><a class="function_link direct" href="visualization#section/edges">edges</a></li></ul></div><h1 id="edgeLabelsVisible" name="edgeLabelsVisible">edgeLabelsVisible<span class="arguments">&nbsp;( [&nbsp;visible&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it shows or hides all the edge labels and returns the Visualization object.</p>
+<p>If not, it returns a boolean value indicating whether or not the edge labels are visible.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>visible</em> ] <span class="type">{Boolean}</span> : true to show the labels or false to hide them.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>edgeLabelsVisible()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>edgeLabelsVisible({Boolean})</code>.</li></ul></p></div></div><h1 id="edges" name="edges">edges<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Get all the regular edges from the network. Merged edges are not included.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{Array} List of edges.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/mergedEdges">mergedEdges</a></li><li><a class="function_link direct" href="visualization#section/nodes">nodes</a></li><li><a class="function_link direct" href="visualization#section/edge">edge</a></li><li><a class="class_link" href="elements#section/Edge">Edge</a></li></ul></div><h1 id="edgesMerged" name="edgesMerged">edgesMerged<span class="arguments">&nbsp;( [&nbsp;merged&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it merges or unmerge all the edges and returns the Visualization object.</p>
+<p>If not, it returns a boolean value indicating whether or not the edges are merged.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>merged</em> ] <span class="type">{Boolean}</span> : true to merge the edges or false to unmerge them.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>edgesMerged()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>edgesMerged({Boolean})</code>.</li></ul></p></div></div><h1 id="edgeTooltipsEnabled" name="edgeTooltipsEnabled">edgeTooltipsEnabled<span class="arguments">&nbsp;( [&nbsp;enabled&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it enables or disables the edge tooltips.</p>
+<p>If not, it returns a boolean value indicating whether or not the edge tooltips are enabled.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>enabled</em> ] <span class="type">{Boolean}</span> : true to enable the tooltips or false to disable them.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>edgeTooltipsEnabled()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>edgeTooltipsEnabled({Boolean})</code>.</li></ul></p></div></div><h1 id="embedSWF" name="embedSWF">embedSWF<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Redefine this function if you want to use another method to detect the Flash Player version
+and embed the SWF file (e.g. SWFObject).</p>
+<p>By default, Adobe's <a href="http://www.adobe.com/products/flashplayer/download/detection_kit/" rel="external">Flash Player Detection Kit</a>
+is used.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>void</p></div></div><h1 id="exportNetwork" name="exportNetwork">exportNetwork<span class="arguments">&nbsp;( format, url, [&nbsp;options&nbsp;]&nbsp;)</span></h1><div class="description"><p>Export the network to a URL.
+It's useful when you want to download the network as an image or xml, for example.</p>
+<p>This method requires a server-side part (e.g. Java, PHP, etc.) to receive the raw data from Cytoscape Web.
+That server-side code should send the data back to the browser.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>format</em> <span class="type">{String}</span> : One of: <code>"png"</code>, <code>"svg"</code>, <code>"pdf"</code>, <code>"xgmml"</code>, <code>"graphml"</code>, <code>"sif"</code>.</p></div><div class="parameter"><p><em>url</em> <span class="type">{String}</span> : The url that will receive the exported image (bytes) or xml (text).</p></div><div class="parameter"><p>[ <em>options</em> ] <span class="type">{Object}</span> : Additional options:
+                             <ul class="options">
+                                 <li><code>width</code>:</strong> The desired width of the image in pixels (only for 'pdf' format).</li>
+                                 <li><code>height</code>:</strong> The desired height of the image in pixels (only for 'pdf' format).</li>
+                                 <li><code>nodeAttr</code>:</strong> Optional node attribute name to be used as the exported SIF node (only for 'sif' format).</li>
+                                 <li><code>interactionAttr</code>:</strong> Optional edge attribute name to be used as the exported SIF interaction (only for 'sif' format).</li>
+                                 <li><code>window</code>:</strong> The browser window or HTML frame in which to display the exported image or xml.
+                                                 You can enter the name of a specific window or use one of the following values:
+                                                 <ul><li><code>_self</code>: the current frame in the current window.</li>
+                                                     <li><code>_blank</code>: a new window.</li>
+                                                     <li><code>_parent</code>: the parent of the current frame.</li>
+                                                     <li><code>_top</code>: the top-level frame in the current window.</li></ul>
+                                                 The default is <code>_self</code>.</li>
+                             </ul></p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// The JavaScript code
+vis.exportNetwork('xgmml', 'export.php?type=xml');</code></pre><pre class="example ln-"><code class="php">&lt;?php
+    # ##### The server-side code in PHP ####
+
+    # Type sent as part of the URL:
+    &#36;type = &#36;_GET['type'];
+    # Get the raw POST data:
+    &#36;data = file_get_contents('php://input');
+
+    # Set the content type accordingly:
+    if (&#36;type == 'png') {
+        header('Content-type: image/png');
+    } elseif (&#36;type == 'pdf') {
+        header('Content-type: application/pdf');
+    } elseif (&#36;type == 'svg') {
+       header('Content-type: image/svg+xml');
+    } elseif (&#36;type == 'xml') {
+        header('Content-type: text/xml');
+    } elseif (&#36;type == 'txt') {
+        header('Content-type: text/plain');
+    }
+
+    # To force the browser to download the file:
+    header('Content-disposition: attachment; filename="network.' . &#36;type . '"');
+    # Send the data to the browser:
+    print &#36;data;
+?&gt;</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/png">png</a></li><li><a class="function_link direct" href="visualization#section/pdf">pdf</a></li><li><a class="function_link direct" href="visualization#section/sif">sif</a></li><li><a class="function_link direct" href="visualization#section/graphml">graphml</a></li><li><a class="function_link direct" href="visualization#section/svg">svg</a></li><li><a class="function_link direct" href="visualization#section/xgmml">xgmml</a></li></ul></div><h1 id="filter" name="filter">filter<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], filter, [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Filter nodes or edges. The filtered out elements will be hidden.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements to filter.
+                                      If <code>null</code>, filter both nodes and edges.</p></div><div class="parameter"><p><em>filter</em> <span class="type">{Object}</span> : A filter function or an array of elements to be filtered.
+                       If a function is passed, it will receive a node or edge as argument and must
+                       return a boolean value indicating the visibility of that element.
+                       So, if it returns false, that node or edge will be hidden.
+                       If the argument is an array, it must contain the IDs or the Node/Edge objects
+                       you want to make or keep visible.</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to update and reapply the visual mappers
+                                       to the network view after the filtering action is done.
+                                       Remember that continuous mappers ignore filtered out elements
+                                       when interpolating the results.
+                                       The default value is <code>false</code>.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Hide all edges that have a weight that is lower than 0.4:
+vis.filter("edges", function(edge) {
+    return edge.data.weight >= 0.4;
+}, true);
+
+// 2. Hide all nodes, except two of them, by id:
+vis.filter("nodes", ['n01', 'n02']);
+
+// 3. Hide all nodes (and edges, of course):
+vis.filter("nodes", []);
+
+// 4. This also hides everything:
+vis.filter();</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeFilter">removeFilter</a></li><li><a class="class_link" href="mappers#section/ContinuousMapper">ContinuousMapper</a></li></ul></div><h1 id="firstNeighbors" name="firstNeighbors">firstNeighbors<span class="arguments">&nbsp;( nodes, [&nbsp;ignoreFilteredOut&nbsp;]&nbsp;)</span></h1><div class="description"><p>Return the first neighbors of one or more nodes.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>nodes</em> <span class="type">{Array}</span> : Array of node objects or node IDs.</p></div><div class="parameter"><p>[ <em>ignoreFilteredOut</em> ] <span class="type">{Boolean}</span> : If <code>true</code>, the algorithm will ignore any filtered out node and edge.
+                                     The default value is <code>false</code>.</p></div><label>Return value</label><div class="return_value"><p>An object that contains the following properties: 
+        <ul class="options"><li><code>rootNodes</code> {Array}: the node objects that were passed as the function parameter.</li>
+            <li><code>neighbors</code> {Array}: the node objects that are neighbors of the root ones.</li>
+            <li><code>edges</code> {Array}: the edge objects that connects the root and the neighbor nodes.</li>
+            <li><code>mergedEdges</code> {Array}: the merged edge objects that connect the returned nodes.</li></ul>.</p></div></div><h1 id="graphml" name="graphml">graphml<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Return the network data as <a href="http://graphml.graphdrawing.org/primer/graphml-primer.html" rel="external">GraphML</a>.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{String} The XML text.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/xgmml">xgmml</a></li><li><a class="function_link direct" href="visualization#section/sif">sif</a></li><li><a class="function_link direct" href="visualization#section/networkModel">networkModel</a></li></ul></div><h1 id="hasListener" name="hasListener">hasListener<span class="arguments">&nbsp;( evt, [&nbsp;gr&nbsp;]&nbsp;)</span></h1><div class="description"><p>Tells whether or not there are listeners to an event type.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>evt</em> <span class="type">{<a class="class_link" href="events#section/EventType">EventType</a>}</span> : The event type.</p></div><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements the listener was assigned to (optional for some events).</p></div><label>Return value</label><div class="return_value"><p>{Boolean} True if there is at least one listener to the event, false otherwise.</p></div><label>See Also</label><ul class="see_also"><li><a class="class_link" href="events#section/Event">Event</a></li><li><a class="function_link direct" href="visualization#section/addListener">addListener</a></li><li><a class="function_link direct" href="visualization#section/removeListener">removeListener</a></li></ul></div><h1 id="layout" name="layout">layout<span class="arguments">&nbsp;( [&nbsp;layout&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the <code>layout</code> argument is passed, it applies the layout to the network.
+Otherwise it just returns the the current layout object.</p>
+<p>In order to set a layout, you can send a layout object or just the layout name, 
+if you want to use the default options.</p>
+<p>See <a class="class_link" href="layout#section/Layout">Layout</a> for the available options.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>layout</em> ] <span class="type">{Object}</span> : The <a class="class_link" href="layout#section/Layout">Layout</a> object or the layout name.</p></div><label>Return value</label><div class="return_value"><p><ul><li>The current <a class="class_link" href="layout#section/Layout">Layout</a> object for <code>layout()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>layout({Object})</code>.</li></ul></p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Initialise Cytoscape Web with a Circle layout (default layout options):
+var vis = new org.cytoscapeweb.Visualization("container-id");
+vis.draw({ network: '&lt;graphml&gt;...&lt;/graphml&gt;', layout: 'Circle' });
+
+// 2. Get the current layout:
+var layout = vis.layout(); // returns: { name: 'Circle', options: { angleWidth: 360 } };
+
+// 3. Apply a new layout, using default options:
+vis.layout('ForceDirected');
+
+// 4. Apply a new layout with custom options:
+var options = { 
+     drag:          0.2,
+     gravitation:   -200,
+     minDistance:   1,
+     maxDistance:   400,
+     mass:          2,
+     tension:       0.2,
+     weightAttr:    "weight",
+     restLength:    100,
+     iterations:    200,
+     maxTime:       10000,
+     autoStabilize: false
+};
+vis.layout({ name: 'ForceDirected', options: options });</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="class_link" href="layout#section/Layout">Layout</a></li></ul></div><h1 id="mergedEdges" name="mergedEdges">mergedEdges<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Get all merged edges from the network.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{Array} List of merged edges.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/edges">edges</a></li><li><a class="class_link" href="elements#section/Edge">Edge</a></li></ul></div><h1 id="networkModel" name="networkModel">networkModel<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Return the network model as an object.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{<a class="class_link" href="elements#section/NetworkModel">NetworkModel</a>} The network model as a JavaScript object.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/graphml">graphml</a></li><li><a class="function_link direct" href="visualization#section/xgmml">xgmml</a></li><li><a class="function_link direct" href="visualization#section/sif">sif</a></li></ul></div><h1 id="node" name="node">node<span class="arguments">&nbsp;( id&nbsp;)</span></h1><div class="description"><p>Get one node by its unique ID.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>id</em> <span class="type">{String}</span> : The node id.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link" href="elements#section/Node">Node</a>} The node object or <code>null</code>, if there is no node with the specified id.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var node = vis.node("n4");</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/edge">edge</a></li><li><a class="function_link direct" href="visualization#section/nodes">nodes</a></li></ul></div><h1 id="nodeLabelsVisible" name="nodeLabelsVisible">nodeLabelsVisible<span class="arguments">&nbsp;( [&nbsp;visible&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it shows or hides all the node labels and returns the Visualization object.</p>
+<p>If not, it returns a boolean value indicating whether or not the node labels are visible.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>visible</em> ] <span class="type">{Boolean}</span> : true to show the labels or false to hide them.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>nodeLabelsVisible()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>nodeLabelsVisible({Boolean})</code>.</li></ul></p></div></div><h1 id="nodes" name="nodes">nodes<span class="arguments">&nbsp;( [&nbsp;topLevelOnly&nbsp;]&nbsp;)</span></h1><div class="description"><p>Get all nodes from the network.</p>
+<p>If the <code>topLevelOnly</code> parameter is <code>true</code>, child nodes are not returned in the list.</p>
+In order to retrieve the children of a compound node, simply pass the parent node object or its <code>id</code>.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>topLevelOnly</em> ] <span class="type">{Boolean}</span> : It is optional and the default value is <code>false</code>, which means that all existing nodes
+                                           are returned as a flat list, no matter whether or not they are regular, child or parent ones.
+                                           If <code>false</code>, nodes that are children of other nodes are not included in the list.</p></div><label>Return value</label><div class="return_value"><p>{Array} List of <a class="class_link" href="elements#section/Node">Node</a> objects.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/edges">edges</a></li><li><a class="function_link direct" href="visualization#section/node">node</a></li><li><a class="function_link direct" href="visualization#section/parentNodes">parentNodes</a></li><li><a class="function_link direct" href="visualization#section/childNodes">childNodes</a></li></ul></div><h1 id="nodeTooltipsEnabled" name="nodeTooltipsEnabled">nodeTooltipsEnabled<span class="arguments">&nbsp;( [&nbsp;enabled&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it enables or disables the node tooltips.</p>
+<p>If not, it returns a boolean value indicating whether or not the node tooltips are enabled.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>enabled</em> ] <span class="type">{Boolean}</span> : true to enable the tooltips or false to disable them.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>nodeTooltipsEnabled()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>nodeTooltipsEnabled({Boolean})</code>.</li></ul></p></div></div><h1 id="panBy" name="panBy">panBy<span class="arguments">&nbsp;( amountX, amountY&nbsp;)</span></h1><div class="description"><p>Pan the "camera" by the specified amount, in pixels.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>amountX</em> <span class="type">{Number}</span> : If negative, pan left (the network moves to the right side).</p></div><div class="parameter"><p><em>amountY</em> <span class="type">{Number}</span> : If negative, pan up (the network moves down).</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/panEnabled">panEnabled</a></li><li><a class="function_link direct" href="visualization#section/panToCenter">panToCenter</a></li></ul></div><h1 id="panEnabled" name="panEnabled">panEnabled<span class="arguments">&nbsp;( [&nbsp;enabled&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it enables or disables the "grab to pan" mode.
+It's like clicking the "grab to pan" button in the pan-zoom control.</p>
+<p>If no argument is passed, it returns a boolean value indicating whether or not the pan mode is enabled.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>enabled</em> ] <span class="type">{Boolean}</span> : If <code>true</code>, clicking and dragging the background will pan the network.
+                           If <code>false</code>, the pan mode is turned off - clicking and dragging the background
+                           will start a drag-selection action.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>panEnabled()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>panEnabled({Boolean})</code>.</li></ul></p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/panBy">panBy</a></li><li><a class="function_link direct" href="visualization#section/panToCenter">panToCenter</a></li></ul></div><h1 id="panToCenter" name="panToCenter">panToCenter<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Center the network in the canvas area.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/panEnabled">panEnabled</a></li><li><a class="function_link direct" href="visualization#section/panBy">panBy</a></li></ul></div><h1 id="panZoomControlVisible" name="panZoomControlVisible">panZoomControlVisible<span class="arguments">&nbsp;( [&nbsp;visible&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the boolean argument is passed, it shows or hides the built-in pan-zoom control.</p>
+<p>If not, it just returns a boolean value indicating whether or not the control is visible.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>visible</em> ] <span class="type">{Boolean}</span> : true to show it and false to hide it.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A boolean value for <code>panZoomControlVisible()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>panZoomControlVisible({Boolean})</code>.</li></ul></p></div></div><h1 id="parentNodes" name="parentNodes">parentNodes<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Get only the compound nodes from the network, if there is any.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{Array} List of <a class="class_link" href="elements#section/Node">Node</a> objects that contain one or more child nodes.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/edges">edges</a></li><li><a class="function_link direct" href="visualization#section/nodes">nodes</a></li><li><a class="function_link direct" href="visualization#section/childNodes">childNodes</a></li><li><a class="function_link direct" href="visualization#section/node">node</a></li></ul></div><h1 id="pdf" name="pdf">pdf<span class="arguments">&nbsp;( [&nbsp;options&nbsp;]&nbsp;)</span></h1><div class="description"><p>Return a PDF with the network vector image.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>options</em> ] <span class="type">{Object}</span> : Additional options:
+                          <ul class="options">
+                              <li><code>width</code>:</strong> The desired width of the image in pixels.</li>
+                              <li><code>height</code>:</strong> The desired height of the image in pixels.</li>
+                          </ul></p></div><label>Return value</label><div class="return_value"><p>{String} The PDF binary data encoded to a Base64 string.</p></div></div><h1 id="png" name="png">png<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Return the network as a PNG image.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{String} The PNG binary data encoded to a Base64 string.</p></div></div><h1 id="ready" name="ready">ready<span class="arguments">&nbsp;( fn&nbsp;)</span></h1><div class="description"><p>Register a function to be called after a <a class="function_link direct" href="visualization#section/draw">draw</a> method is executed and the visualization
+is ready to receive requests, such as getting or selecting nodes, zooming, etc.</p>
+<p>If the application wants to interact with the rendered network, this function must be used
+before calling the <code>draw</code> method.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>fn</em> <span class="type">{Function}</span> : The callback function that will be invoked after the network has been drawn
+                     and the visualization is ready.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Create the visualization instance:
+var vis = new org.cytoscapeweb.Visualization("container-id");
+
+// 2. Register a callback function for the ready event:
+vis.ready(function () {
+    // Write code to interact with Cytoscape Web, e.g:
+    var nodes = vis.nodes();
+    // and so on...
+});
+
+// 3. And then call draw:
+vis.draw({ network: '&lt;graphml&gt;...&lt;/graphml&gt;' });</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/draw">draw</a></li></ul></div><h1 id="removeAllContextMenuItems" name="removeAllContextMenuItems">removeAllContextMenuItems<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Removes all preset menu items from the right-click context menu.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addContextMenuItem">addContextMenuItem</a></li><li><a class="function_link direct" href="visualization#section/removeContextMenuItem">removeContextMenuItem</a></li></ul></div><h1 id="removeContextMenuItem" name="removeContextMenuItem">removeContextMenuItem<span class="arguments">&nbsp;( lbl, [&nbsp;gr&nbsp;]&nbsp;)</span></h1><div class="description"><p>Removes a menu item from the right-click context menu.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>lbl</em> <span class="type">{String}</span> : The menu item label.</p></div><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The related group. If <code>null</code>, and there is a menu item with the same label
+                                       associated with a <code>"nodes"</code> or <code>"edges"</code> group, that item will not be removed.
+                                       In that case, you need to call this function again with the other groups.</p>
+                                       </p>For example, <code>removeContextMenuItem("Select")</code> does not remove the menu item
+                                       added with <code>addContextMenuItem("Select", "edge")</code>, but only the the one added with
+                                       <code>addContextMenuItem("Select")</code>.<p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addContextMenuItem">addContextMenuItem</a></li><li><a class="function_link direct" href="visualization#section/removeAllContextMenuItems">removeAllContextMenuItems</a></li></ul></div><h1 id="removeDataField" name="removeDataField">removeDataField<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], name&nbsp;)</span></h1><div class="description"><p>Remove a custom attribute definition from the data schema.</p>
+<p>Remember that only custom metadata can be removed. Any attempt to remove the following data fields will be ignored:</p>
+<ul>
+    <li><code>id</code> (nodes and edges)</li>
+    <li><code>source</code> (edges)</li>
+    <li><code>target</code> (edges)</li>
+    <li><code>directed</code> (edges)</li>
+</ul></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements. If no group is passed,
+                                     Cytoscape Web will try to remove the field from both nodes and edges data schema.</p></div><div class="parameter"><p><em>name</em> <span class="type">{String}</span> : The name of the custom data field that will be removed.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1: Remove a data field from nodes and edges:
+vis.removeDataField("url");
+
+// 2: Remove a data field from edges only:
+vis.removeDataField("edges", "url");</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addDataField">addDataField</a></li><li><a class="function_link direct" href="visualization#section/updateData">updateData</a></li><li><a class="function_link direct" href="visualization#section/dataSchema">dataSchema</a></li></ul></div><h1 id="removeEdge" name="removeEdge">removeEdge<span class="arguments">&nbsp;( edge, [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Permanently delete the specified edge from the network.</p>
+<p>If the specified edge is a merged one, all of its "regular" edges are deleted as well.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>edge</em> <span class="type">{Object}</span> : The edge to be removed from the network. It can be an <a class="class_link" href="elements#section/Edge">Edge</a>
+                     object or just its <code>id</code> (String).</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to reapply the visual mappers
+                                       to the network view after removing the element.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Pass the whole Edge object:
+var edge = vis.edges()[0];
+vis.removeEdge(edge);
+
+// 2. Or just pass the edge id:
+vis.removeEdge("e101");</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeNode">removeNode</a></li><li><a class="function_link direct" href="visualization#section/removeElements">removeElements</a></li><li><a class="function_link direct" href="visualization#section/addNode">addNode</a></li><li><a class="function_link direct" href="visualization#section/addEdge">addEdge</a></li></ul></div><h1 id="removeElements" name="removeElements">removeElements<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], [&nbsp;items&nbsp;], [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Permanently delete nodes and/or edges from the network.</p>
+<p>If a node is deleted, all of its connected edges will be removed as well.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements.</p></div><div class="parameter"><p>[ <em>items</em> ] <span class="type">{Array}</span> : The items to be removed from the network. The array can contain node/edge objects or only
+                       their <code>id</code> values. Remember that, if you pass only the id
+                       and do not pass the group argument, if an edge and a node have the same id value,
+                       both will be removed.</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to reapply the visual mappers
+                                       to the network view after removing the elements.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Remove edges by ID:
+vis.removeElements("edges", ["1", "2", "5"]);
+
+// 2. Remove edges and nodes altogether, by passing the objects to be deleted:
+var nodes = vis.nodes();
+var edges = vis.edges();
+vis.removeElements([nodes[0], nodes[1], edges[0]], true);
+
+// 3. Remove all edges:
+vis.removeElements("edges");
+
+// 4. Remove everything (nodes and edges):
+vis.removeElements();</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeNode">removeNode</a></li><li><a class="function_link direct" href="visualization#section/removeEdge">removeEdge</a></li><li><a class="function_link direct" href="visualization#section/addNode">addNode</a></li><li><a class="function_link direct" href="visualization#section/addEdge">addEdge</a></li></ul></div><h1 id="removeFilter" name="removeFilter">removeFilter<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Remove a nodes or edges filter.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements to remove the filter from.
+                                      If <code>null</code>, remove any existing filters from both nodes and edges.</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to update and reapply the visual mappers
+                                       to the network view after the filtering action is done.
+                                       Remember that continuous mappers ignore filtered out elements
+                                       when interpolating the results.
+                                       The default value is <code>false</code>.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/filter">filter</a></li><li><a class="class_link" href="mappers#section/ContinuousMapper">ContinuousMapper</a></li></ul></div><h1 id="removeListener" name="removeListener">removeListener<span class="arguments">&nbsp;( evt, [&nbsp;gr&nbsp;], [&nbsp;fn&nbsp;]&nbsp;)</span></h1><div class="description"><p>Removes an event listener.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>evt</em> <span class="type">{<a class="class_link" href="events#section/EventType">EventType</a>}</span> : The event type.</p></div><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements to assign the listener to (optional for some events).</p></div><div class="parameter"><p>[ <em>fn</em> ] <span class="type">{Function}</span> : The function the event invokes. If undefined, all registered functions
+                       for the specified event are removed.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>See Also</label><ul class="see_also"><li><a class="class_link" href="events#section/Event">Event</a></li><li><a class="function_link direct" href="visualization#section/addListener">addListener</a></li><li><a class="function_link direct" href="visualization#section/hasListener">hasListener</a></li></ul></div><h1 id="removeNode" name="removeNode">removeNode<span class="arguments">&nbsp;( node, [&nbsp;updateVisualMappers&nbsp;]&nbsp;)</span></h1><div class="description"><p>Permanently delete the specified node and its associated edges from the network.</p>
+<p>If a node is deleted, all of its connected edges will be removed as well.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>node</em> <span class="type">{Object}</span> : The node to be removed from the network. It can be a <a class="class_link" href="elements#section/Node">Node</a>
+                     object or just its <code>id</code> (String).</p></div><div class="parameter"><p>[ <em>updateVisualMappers</em> ] <span class="type">{Boolean}</span> : It tells Cytoscape Web to reapply the visual mappers
+                                       to the network view after removing the element.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1. Pass the whole Node object:
+var node = vis.nodes()[0];
+vis.removeNode(node);
+
+// 2. Or just specify the node id:
+vis.removeNode("n3");</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/removeEdge">removeEdge</a></li><li><a class="function_link direct" href="visualization#section/removeElements">removeElements</a></li><li><a class="function_link direct" href="visualization#section/addNode">addNode</a></li><li><a class="function_link direct" href="visualization#section/addEdge">addEdge</a></li></ul></div><h1 id="select" name="select">select<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], [&nbsp;items&nbsp;]&nbsp;)</span></h1><div class="description"><p>Select the indicated nodes and edges.</p>
+<p>The same method can also be used to select all nodes/edges.
+To do that, just omit the <code>items</code> argument and specify the group of elements to be selected.</p>
+<p>If you send repeated or invalid elements, they will be ignored.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements.</p></div><div class="parameter"><p>[ <em>items</em> ] <span class="type">{Array}</span> : The items to be selected. The array can contain node/edge objects or only
+                       their <code>id</code> values. Notice however that, if you specify only the id
+                       and do not pass the group argument, if an edge and a node have the same id value,
+                       both will be selected.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// a) Select nodes by id:
+var ids = [1,3,5,10];
+vis.select("nodes", ids);
+
+// b) Select one node:
+// Notice that the group parameter ("nodes") is optional here,
+// because it's sending a node object and not only its id.
+var n = vis.nodes()[0];
+vis.select([n]);
+
+// c) Select nodes and edges at the same time:
+var n = vis.nodes()[0];
+var e = vis.edges()[0];
+vis.select([n,e]);
+
+// d) Select all nodes:
+vis.select("nodes");
+
+// e) Select all edges:
+vis.select("edges");
+
+// f) Select all nodes and all edges:
+vis.select();</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/deselect">deselect</a></li><li><a class="function_link direct" href="visualization#section/selected">selected</a></li></ul></div><h1 id="selected" name="selected">selected<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;]&nbsp;)</span></h1><div class="description"><p>Get all selected nodes or edges from the network.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements.</p></div><label>Return value</label><div class="return_value"><p>{Array} List of node or edge objects. If the group is not passed or is <code>null</code>,
+                the returned array may contain both nodes and edges.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/select">select</a></li><li><a class="function_link direct" href="visualization#section/deselect">deselect</a></li></ul></div><h1 id="sif" name="sif">sif<span class="arguments">&nbsp;( [&nbsp;options&nbsp;]&nbsp;)</span></h1><div class="description"><p>Return the network data as <a href="http://cytoscape.wodaklab.org/wiki/Cytoscape_User_Manual/Network_Formats/" rel="external">Simple Interaction Format (SIF)</a>.</p>
+<p>Cytoscape Web uses tab characters to delimit the fields, because the node and interaction names may contain spaces.</p>
+<p>By default, the node name in the SIF text is taken from the node's <code>data.id</code> attribute.
+You can choose any other node attribute to be the node name by passing the <code>nodeAttr</code> option. 
+Of course the custom node field should have unique values.</p>
+<p>Cytoscape Web tries to get the interaction name from the edge's <code>data.interaction</code> attribute.
+You can choose any other edge attribute to be the interaction name by passing the <code>interactionAttr</code> option.
+If the edge data does not have the defined interaction field, Cytoscape Web just uses the edge <code>id</code>.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>options</em> ] <span class="type">{Object}</span> : Non-mandatory settings:
+                          <ul class="options">
+                              <li><code>nodeAttr</code>:</strong> Optional node attribute name to be used as node name.</li>
+                              <li><code>interactionAttr</code>:</strong> Optional edge attribute name to be used as interaction name.</li>
+                          </ul></p></div><label>Return value</label><div class="return_value"><p>{String} The SIF text.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var xml = '&lt;graphml&gt;' +
+              // Create a custom node "label" attribute:
+              '&lt;key id="label" for="node" attr.name="label" attr.type="string"/&gt;' +
+              // Create a custom  edge "type" attribute:
+              '&lt;key id="type" for="edge" attr.name="type" attr.type="string"/&gt;' +
+              '&lt;graph&gt;' +
+                  '&lt;node id="1"&gt;' +
+                      '&lt;data key="label"&gt;Node 1&lt;/data&gt;' +
+                  '&lt;/node&gt;' +
+                  '&lt;node id="2"&gt;' +
+                      '&lt;data key="label"&gt;Node 2&lt;/data&gt;' +
+                  '&lt;/node&gt;' +
+                  '&lt;edge source="1" target="2"&gt;' +
+                      '&lt;data key="type"&gt;co-expression&lt;/data&gt;' +
+                  '&lt;/edge&gt;' +
+                  '&lt;edge source="2" target="1"&gt;' +
+                      '&lt;data key="type"&gt;co-localization&lt;/data&gt;' +
+                  '&lt;/edge&gt;' +
+              '&lt;/graph&gt;' +
+          '&lt;/graphml&gt;';
+          
+var vis = new org.cytoscapeweb.Visualization("container_id");
+
+vis.ready(function() {
+    // Export to SIF, using the "label" as node ID and edge "type" as edge interaction:
+    var text = vis.sif({ nodeAttr: 'label', interactionAttr: 'type'});
+    
+    // text ==  'Node 1\tco-expression\tNode 2\n' +
+    //          'Node 2\tco-localization\Node 1\n'
+});
+
+vis.draw({ network: xml });</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/graphml">graphml</a></li><li><a class="function_link direct" href="visualization#section/xgmml">xgmml</a></li><li><a class="function_link direct" href="visualization#section/networkModel">networkModel</a></li></ul></div><h1 id="svg" name="svg">svg<span class="arguments">&nbsp;( [&nbsp;options&nbsp;]&nbsp;)</span></h1><div class="description"><p>Return an SVG image.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>options</em> ] <span class="type">{Object}</span> : Additional options:
+                          <ul class="options">
+                              <li><code>width</code>:</strong> The desired width of the image in pixels.</li>
+                              <li><code>height</code>:</strong> The desired height of the image in pixels.</li>
+                          </ul></p></div><label>Return value</label><div class="return_value"><p>{String} The SVG image.</p></div></div><h1 id="swf" name="swf">swf<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Get Cytoscape Web's Flash object.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{Object} The appropriate reference to the Flash object.</p></div></div><h1 id="updateData" name="updateData">updateData<span class="arguments">&nbsp;( [&nbsp;gr&nbsp;], [&nbsp;items&nbsp;], [&nbsp;data&nbsp;]&nbsp;)</span></h1><div class="description"><p>This method updates nodes and edges <code>data</code> attributes. You can use it to
+change the value of any existing data attribute, except:</p>
+<ul>
+    <li><code>id</code> (nodes and edges)</li>
+    <li><code>source</code> (edges)</li>
+    <li><code>target</code> (edges)</li>
+</ul>
+<p>You can only update <code>data</code> attributes. Visual properties such as <code>color</code>
+and <code>width</code> cannot be updated with this method. In order to change visual properties,
+use <a class="function_link direct" href="visualization#section/visualStyle">visualStyle</a> or <a class="function_link direct" href="visualization#section/visualStyleBypass">visualStyleBypass</a>.</p>
+<p>If you try to change an attribute that has not been previously defined, Cytoscape Web will throw an <a class="class_link" href="events#section/Error">Error</a>.
+In this case, you have to add the attribute definition first, by calling <a class="function_link direct" href="visualization#section/addDataField">addDataField</a>.</p>
+<p>Another important thing to remember is that you cannot update merged edges data, since they are derived attributes.</p>
+<p>Finally, all the continuous and custom mappers - defined by the current visual style - will be automatically recomputed after
+updating the data.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>gr</em> ] <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements.</p></div><div class="parameter"><p>[ <em>items</em> ] <span class="type">{Array}</span> : The items to be updated. The array can contain node/edge objects or only
+                       their <code>id</code> values. Notice however that, if you specify only the id
+                       and do not pass the group argument, if an edge and a node have the same id value,
+                       both will be updated.</p></div><div class="parameter"><p>[ <em>data</em> ] <span class="type">{Object}</span> : The data object that contains the attributes with the new values to be applied
+                       to all the elements of the specified group or to the passed <code>items</code> only.</p></div><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// 1: Update only one node or edge:
+var n = vis.nodes()[0];
+n.data.label = "New Label...";
+n.data.weight *= 2;
+vis.updateData([n]);
+
+// 2: Update more than one object at once:
+var nodes = vis.nodes();
+var n1 = nodes[0];
+var n2 = nodes[1];
+n1.data.label = "New Label for N1";
+n2.data.label = "New Label for N2";
+
+var e = vis.edges[0];
+e.data.weight = 0.8;
+
+vis.updateData([n1, n2, e]);
+
+// 3: Update more than one object from the same group at once,
+//    setting the same values to all of them:
+var edge_ids = ["1","3","7"];
+var data = { weight: 0.5, interaction: "pp" };
+vis.updateData("edges", edge_ids, data);
+
+// 4: Update more than one node and edge at once,
+//    setting the same values to all of them:
+var ids = ["n1","n2","e7","e10"];
+var data = { weight: 0 };
+vis.updateData(ids, data);
+
+// 5: Update all nodes and edges with the same attribute values:
+var data = { weight: 0 };
+vis.updateData(data);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/addDataField">addDataField</a></li><li><a class="function_link direct" href="visualization#section/removeDataField">removeDataField</a></li><li><a class="function_link direct" href="visualization#section/dataSchema">dataSchema</a></li></ul></div><h1 id="visualStyle" name="visualStyle">visualStyle<span class="arguments">&nbsp;( [&nbsp;style&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the <code>style</code> argument is passed, it applies that visual style to the network.
+Otherwise it just returns the current visual style object.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>style</em> ] <span class="type">{<a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a>}</span> : An object that contains the desired visual properties and attribute mappings.</p></div><label>Return value</label><div class="return_value"><p><ul><li>The <a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a> object for <code>visualStyle()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>visualStyle({Object})</code>.</li></ul></p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var style = {
+        global: {
+            backgroundColor: "#000000"
+        },
+        nodes: {
+            color: "#ffffff",
+            size: 40
+        }
+};
+
+vis.visualStyle(style);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="class_link" href="visual_style#section/VisualStyle">VisualStyle</a></li><li><a class="function_link direct" href="visualization#section/visualStyleBypass">visualStyleBypass</a></li></ul></div><h1 id="visualStyleBypass" name="visualStyleBypass">visualStyleBypass<span class="arguments">&nbsp;( bypass&nbsp;)</span></h1><div class="description"><p>If the <code>bypass</code> argument is passed, it sets a visual style bypass on top of the regular styles.
+Otherwise it just returns the current bypass object.</p>
+<p>It allows you to override the visual styles (including the ones set by mappers) for individual nodes and edges,
+which is very useful when the default visual style mechanism is not enough to create the desired effect.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p><em>bypass</em> <span class="type">{<a class="class_link" href="visual_style#section/VisualStyleBypass">VisualStyleBypass</a>}</span> : The visual properties for nodes and edges. Must be a map that has nodes/edges
+                                                   ids as keys and the desired visual properties as values.
+                                                   The visual properties are the same ones used by the VisualStyle objects, except that
+                                                   <code>global</code> properties cannot be bypassed and are just ignored. Another difference is that you
+                                                   cannot set visual mappers, but only static values.</p></div><label>Return value</label><div class="return_value"><p><ul><li>The <a class="class_link" href="visual_style#section/VisualStyleBypass">VisualStyleBypass</a> object for <code>visualStyleBypass()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> instance for <code>visualStyleBypass({Object})</code>.</li></ul></p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">// Change the labels of selected nodes and edges:
+var selected = vis.selected();
+
+var bypass = { nodes: { }, edges: { } };
+var props = { 
+        labelFontSize: 16,
+        labelFontColor: "#ff0000",
+        labelFontWeight: "bold"
+};
+
+for (var i=0; i < selected.length; i++) {
+    var obj = selected[i];
+    
+    // obj.group is either "nodes" or "edges"...
+    bypass[obj.group][obj.data.id] = props;
+}
+
+vis.visualStyleBypass(bypass);</code></pre><pre class="example ln-"><code class="js">// To remove a bypass, just set <code>null</code> or an empty object:
+vis.visualStyleBypass(null);</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="class_link" href="visual_style#section/VisualStyleBypass">VisualStyleBypass</a></li><li><a class="function_link direct" href="visualization#section/visualStyle">visualStyle</a></li></ul></div><h1 id="xgmml" name="xgmml">xgmml<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Return the network data as <a href="http://cgi5.cs.rpi.edu/research/groups/pb/punin/public_html/XGMML/" rel="external">XGMML</a>.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{String} The XML text.</p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/graphml">graphml</a></li><li><a class="function_link direct" href="visualization#section/sif">sif</a></li><li><a class="function_link direct" href="visualization#section/networkModel">networkModel</a></li></ul></div><h1 id="zoom" name="zoom">zoom<span class="arguments">&nbsp;( [&nbsp;scale&nbsp;]&nbsp;)</span></h1><div class="description"><p>If the scale argument is passed, it changes the zoom level of the network.
+Otherwise it gets the current zoom value.</p></div><div class="details"><label>Parameters</label><div class="parameter"><p>[ <em>scale</em> ] <span class="type">{Number}</span> : Value between 0 and 1.</p></div><label>Return value</label><div class="return_value"><p><ul><li>A number for <code>zoom()</code>.</li>
+            <li>The <a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a> object for <code>zoom({Number})</code>.</li></ul></p></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/zoomToFit">zoomToFit</a></li></ul></div><h1 id="zoomToFit" name="zoomToFit">zoomToFit<span class="arguments">&nbsp;( &nbsp;)</span></h1><div class="description"><p>Change the scale of the network until it fits the screen.</p>
+<p>If the network scale is or reaches 1 (100%) and it's not cropped, it is not zoomed in to more than that.
+It also centers the network, even if the scale was not changed.</p>
+<p>It does not return the result scale.
+If you want to get the applied zoom level, add an event listener before calling <code>zoomToFit</code>.</p></div><div class="details"><label>Return value</label><div class="return_value"><p>{<a class="class_link direct" href="visualization#section/org.cytoscapeweb.Visualization">org.cytoscapeweb.Visualization</a>} The Visualization instance.</p></div><label>Examples</label><div class="examples"><pre class="example ln-"><code class="js">var scale;
+vis.addListener("zoom", function(evt) {
+    scale = evt.value;
+});
+vis.zoomToFit();</code></pre></div><label>See Also</label><ul class="see_also"><li><a class="function_link direct" href="visualization#section/zoom">zoom</a></li></ul></div></div>
+
+
+	        </div>
+	        <!-- end page content -->
+        </div> 
+	
+        <div id="footer" class="slice">
+            <p>
+                Cytoscape Web development is funded by <a href="http://www.genomecanada.ca">Genome Canada</a>, through the
+                <a href="http://www.ontariogenomics.ca/">Ontario Genomics Institute</a> (2007-OGI-TD-05).</p>
+			<p>
+				Funding for <a href="http://www.cytoscape.org">Cytoscape</a> is provided by a federal grant from the U.S. 
+				<a href="http://www.nigms.nih.gov">National Institute of General Medical Sciences (NIGMS)</a> 
+				of the <a href="http://www.nih.gov">National Institutes of Health (NIH)</a> under award 
+				number GM070743-01 and the U.S. <a href="http://www.nsf.gov">National Science Foundation (NSF)</a>.
+			</p>
+			<p>
+		  		<a href="http://www.systemsbiology.org"> ISB </a> | 
+		  		<a href="http://www.ucsd.edu"> UCSD </a> | 
+		  		<a href="http://cbio.mskcc.org"> MSKCC </a> | 
+		  		<a href="http://www.pasteur.fr"> Pasteur </a> | 
+		  		<a href="http://www.agilent.com/"> Agilent </a> | 
+		  		<a href="http://www.ucsf.edu/"> UCSF </a> |
+				<a href="http://www.unilever.com"> Unilever </a> |
+				<a href="http://www.utoronto.ca"> Toronto </a> |
+				<a href="http://portal.ncibi.org/gateway/index.html"> NCIBI </a>
+		  	</p>
+
+			<p>
+				&copy; 
+	            2009&ndash;2020            	Cytoscape Consortium
+        	</p>
+        </div>
+
+    </body>
+
+</html>

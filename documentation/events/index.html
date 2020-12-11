@@ -1,0 +1,261 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html>
+    <head>
+            
+        <title>Cytoscape Web &#187; Documentation &#187; Events</title>
+        
+        <link rel="shortcut icon" href="../../img/layout/favicon.png" />
+        <meta name="keywords" content="Cytoscape, Cytoscape Web, visualization, interaction network, graph, bioinformatics, computational biology, pathways">
+        
+        
+        <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+<link rel="stylesheet" type="text/css" href="../../css/content.css" />
+<link rel="stylesheet" type="text/css" href="../../css/content/documentation.css" />
+        
+        <!--[if IE]>
+                <![endif]-->
+        
+        <script type="text/javascript" src="../../js/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../../js/jquery/plugins/jquery.qtip-1.0.0-rc3.min.js"></script>
+<script type="text/javascript" src="../../js/layout/layout.js"></script>
+<script type="text/javascript" src="../../js/jquery/plugins/chili/jquery.chili-2.2.js"></script>
+<script type="text/javascript" src="../../js/jquery/plugins/chili/recipes.js"></script>
+<script type="text/javascript" src="../../js/layout/side.js"></script>
+<script type="text/javascript" src="../../js/content/documentation.js"></script>
+<script type="text/javascript" src="../../js/util/ga.js"></script>
+        
+        <!--[if IE]>
+                <![endif]-->
+
+        
+        	</head>
+	
+    <body>
+	
+        <div id="header" class="slice">
+            <a href="../../index.html" title="Home"><div id="logo">Cytoscape Web</div></a>
+            
+            <div id="navigation_links">
+                <ul>
+                    <li><a href="../../download">Download</a></li>
+<li><a href="../../tutorial">Tutorial</a></li>
+<li><a href="../../faq">FAQ</a></li>
+<li class="selected" ><a href="../../documentation">Documentation</a></li>
+<li><a href="../../demos">Demos</a></li>
+<li><a href="../../about">About</a></li>
+<li><a href="../../contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <form action="http://www.google.com/cse" id="cse-search-box">
+                <input type="hidden" name="cx" value="016016542103382164689:dyea8plfovk" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <div id="search">
+                        <div id="search_input">
+                            <input type="text" name="q" size="25" value="Search this site via Google" />
+                        </div>
+                        <button id="search_button" name="sa"></button>
+                </div>
+            </form>
+            
+        </div>
+		  
+        <div id="page" class="slice">
+            
+            <div id="cytoscapejs_note" class="slice">
+                <p>
+                    <img class="cytoscapejs_note_icon1" src="../../img/icons/triangle38.png"></img>
+                    <img class="cytoscapejs_note_icon2" src="../../img/icons/triangle38.png"></img>
+                    This project has been replaced by <strong><a href="http://js.cytoscape.org">Cytoscape.js</a></strong>, 
+                    and is no longer active.
+                </p>
+            </div>
+            
+            <div id="page_navigation">
+                <ul>
+                    <li><a href="../elements">Elements</a></li>
+                    <li class="selected"><a href="../events">Events</a></li>
+                    <li><a href="../layout">Layout</a></li>
+                    <li><a href="../mappers">Mappers</a></li>
+                    <li><a href="../schema">Schema</a></li>
+                    <li><a href="../shapes">Shapes</a></li>
+                    <li><a href="../visual_style">Visual style</a></li>
+                    <li><a href="../visualization">Visualization</a></li>
+                </ul>
+            </div>
+                        
+            <!-- begin page content -->
+            <div id="content" class="side">
+            
+            <div class="right"><div class="nav"></div></div><div class="left api">
+    <h1 id="Event" name="Event">Event</h1><div class="description"><p>This object represents an Event.</p>
+<p>Events are objects passed as arguments to listeners when an event occurs.</p>
+<p>All event objects have at least the following fields:</p>
+   <ul><li><code>type</code></li><li><code>group</code></li></ul>
+<p>The following tables lists the possible properties for each event type.</p>
+<p><label><strong>click:</strong></label> Fired when the user clicks an element that belongs to the <code>group</code> you registered. 
+If you don't specify any group or if the group is <code>none</code>, the event will be fired when the background of the network visualization is clicked.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td><a class="class_link" href="elements#section/Node">Node</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td><a class="class_link" href="elements#section/Edge">Edge</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code>: clicking the visualization background</td><td><code>undefined</code></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>dblclick:</strong></label> Fired when the user double clicks an element that belongs to the <code>group</code> you registered. 
+If you don't specify any group or if the group is <code>none</code>, the event will be fired when the background of the network visualization is double-clicked.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td><a class="class_link" href="elements#section/Node">Node</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td><a class="class_link" href="elements#section/Edge">Edge</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code>: double-clicking the visualization background</td><td><code>undefined</code></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>dragstart:</strong></label> Fired when the user starts dragging a node.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td><a class="class_link" href="elements#section/Node">Node</a></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>dragstop:</strong></label> Fired when the user stops dragging a node.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td><a class="class_link" href="elements#section/Node">Node</a></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>mouseover:</strong></label> Fired when the user moves the mouse over an element that belongs to the <code>group</code> you registered. 
+If you don't specify any group or if the group is <code>none</code>, the event will be fired any time the cursor enters the visualization rectangle.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td><a class="class_link" href="elements#section/Node">Node</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td><a class="class_link" href="elements#section/Edge">Edge</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code>: mouse enters the visualization area</td><td><code>undefined</code></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>mouseout:</strong></label> Fired when the user moves the mouse out of an element that belongs to the <code>group</code> you registered. 
+If you don't specify any group or if the group is <code>none</code>, the event will be fired when the cursor leaves the visualization area.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td><a class="class_link" href="elements#section/Node">Node</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td><a class="class_link" href="elements#section/Edge">Edge</a></td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code>: mouse leaves the visualization area</td><td><code>undefined</code></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>select:</strong></label> Fired when an element that belongs to the <code>group</code> you registered is selected.
+Nodes and edges can be selected by three possible ways:
+directly clicking it; using the drag-rectangle (the select event is dispatched only after the the mouse button is released); programmatically, with <a href="visualization#section/select">org.cytoscapeweb.Visualization :: select</a>. 
+If you don't specify any group or if the group is <code>none</code>, the event will be fired after selecting any nodes or edges.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td>Array of selected <a class="class_link" href="elements#section/Node">Node</a> objects</td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td>Array of selected <a class="class_link" href="elements#section/Edge">Edge</a> objects</td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code></td><td>Array of selected <a class="class_link" href="elements#section/Node">Node</a> and <a class="class_link" href="elements#section/Edge">Edge</a> objects</td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>deselect:</strong></label> Fired when an element that belongs to the <code>group</code> you registered is deselected.
+Nodes and edges can be deselected by the user or programmatically, with <a href="visualization#section/deselect">org.cytoscapeweb.Visualization :: deselect</a>. 
+If you don't specify any group or if the group is <code>none</code>, the event will be fired after deselecting any nodes or edges.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td>Array of deselected <a class="class_link" href="elements#section/Node">Node</a> objects</td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td>Array of deselected <a class="class_link" href="elements#section/Edge">Edge</a> objects</td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code></td><td>Array of deselected <a class="class_link" href="elements#section/Node">Node</a> and <a class="class_link" href="elements#section/Edge">Edge</a> objects</td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>filter:</strong></label> Fired when the <code>group</code> you registered is filtered.
+Nodes and edges can be filtered with <a href="visualization#section/filter">org.cytoscapeweb.Visualization :: filter</a>.  
+If you don't specify any group or if the group is <code>none</code>, the event will be fired after filtering nodes or edges elements.
+It is important to be aware that if no element of the specified <code>group</code> is filtered (no filter applied), 
+the event's <code>target</code> property will be <code>null</code>.
+But if all the elements of that <code>group</code> is filtered out, <code>target</code> will be an empty array.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td>Array of filtered <a class="class_link" href="elements#section/Node">Node</a> objects or <code>null</code></td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td>Array of filtered <a class="class_link" href="elements#section/Edge">Edge</a> objects or <code>null</code></td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code></td><td>Array of filtered <a class="class_link" href="elements#section/Node">Node</a> and <a class="class_link" href="elements#section/Edge">Edge</a> objects or <code>null</code></td><td><code>undefined</code></td></tr>
+</Table>
+<p><label><strong>layout:</strong></label> Fired after a layout is applied (see <a href="visualization#section/layout">org.cytoscapeweb.Visualization :: layout</a>.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>none</code></td><td><code>undefined</code></td><td><code>The applied <a class="class_link" href="layout#section/Layout">Layout</a> object</code></td></tr>
+</Table>
+<p><label><strong>zoom:</strong></label> Fired after the network is rescaled, either by calling <a href="visualization#section/zoom">org.cytoscapeweb.Visualization :: zoom</a> or 
+when the user interacts with the visualization's pan-zoom control.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>none</code></td><td><code>undefined</code></td><td>The zoom value (float number from 0 to 1)</td></tr>
+</Table>
+<p><label><strong>error:</strong></label> Fired when an exception is thrown.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>none</code></td><td><code>undefined</code></td><td>The <a class="class_link direct" href="events#section/Error">Error</a> object</td></tr>
+</Table>
+<p><label><strong>contextmenu:</strong></label> Events of this type are only passed to the callback functions that are registered with <a href="visualization#section/addContextMenuItem">org.cytoscapeweb.Visualization :: addContextMenuItem</a>.
+You cannot add listeners to this event.</p>
+<table>
+    <tr><th>group</th><th>target</th><th>value</th></tr>
+    <tr><td><code>nodes</code></td><td>The related <a class="class_link" href="elements#section/Node">Node</a> object</td><td><code>undefined</code></td></tr>
+    <tr><td><code>edges</code></td><td>The related  <a class="class_link" href="elements#section/Edge">Edge</a> object</td><td><code>undefined</code></td></tr>
+    <tr><td><code>none</code></td><td>The <a class="class_link" href="elements#section/Node">Node</a> or <a class="class_link" href="elements#section/Edge">Edge</a> object, if a node or edge was right-clicked. Or <code>undefined</code>, if the right click was done on an empty background area.</td><td><code>undefined</code></td></tr>
+</Table></div><div class="details"><label>Fields</label><div class="fields"><div class="field"><p><em>group</em> <span class="type">{<a class="class_link" href="elements#section/Group">Group</a>}</span> : The group of network elements the event is related to.</p></div><div class="field"><p><em>mouseX</em> : The local x coordinate of the mouse position, in pixels.
+Available only when the event type is 'click', 'dblclick', 'mouseover', 'mouseout' or 'contextmenu'.</p></div><div class="field"><p><em>mouseY</em> : The local y coordinate of the mouse position, in pixels.
+Available only when the event type is 'click', 'dblclick', 'mouseover', 'mouseout' or 'contextmenu'.</p></div><div class="field"><p><em>target</em> <span class="type">{Object}</span> : The event target. For example, if one or more nodes are selected, the target of the 
+<code>"select"</code> event will be an array of node objects.
+But if a node is clicked, the target of the <code>"click"</code> event will be just a node object.
+This property is available only for event types that are related to actions performed on nodes or edges.
+For the other events it is <code>undefined</code>.</p></div><div class="field"><p><em>type</em> <span class="type">{<a class="class_link direct" href="events#section/EventType">EventType</a>}</span> : The event type name.</p></div><div class="field"><p><em>value</em> : This property is a very generic one and is usually used to send back any important value that
+is not defined as <code>target</code>. For example, for <code>"zoom"</code> events, value is
+the new scale, but for <code>"error"</code> events it is an error object.</p></div></div><label>See Also</label><ul class="see_also"><li><a class="class_link direct" href="events#section/EventType">EventType</a></li><li><a href="visualization#section/addListener">org.cytoscapeweb.Visualization :: addListener</a></li><li><a href="visualization#section/hasListener">org.cytoscapeweb.Visualization :: hasListener</a></li><li><a href="visualization#section/removeListener">org.cytoscapeweb.Visualization :: removeListener</a></li></ul></div><h1 id="EventType" name="EventType">EventType</h1><div class="description"><p>This object represents an event type. In actuality, it is a string.</p>
+<p>All of them, but <code>"contextmenu"</code> can be used with the listener methods 
+(<a href="visualization#section/addListener">org.cytoscapeweb.Visualization :: addListener</a>, <a href="visualization#section/hasListener">org.cytoscapeweb.Visualization :: hasListener</a> and
+<a href="visualization#section/removeListener">org.cytoscapeweb.Visualization :: removeListener</a>).</p>
+<p>Its value must be one of:</p>
+    <ul class="options">
+        <li><code>click</code>:</strong> For mouse click events on nodes, edges or the visualization background.</li>
+        <li><code>dblclick</code>:</strong> For double-click events on nodes, edges or the visualization background.</li>
+        <li><code>dragstart</code>:</strong> For drag-start events on nodes.</li>
+        <li><code>dragstop</code>:</strong> For drag-stop events on nodes.</li>
+        <li><code>mouseover</code>:</strong> For mouse-over events on nodes, edges or the visualization background.</li>
+        <li><code>mouseout</code>:</strong> For mouse-out events on nodes, edges or the visualization background.</li>
+        <li><code>select</code>:</strong> For events dispatched after nodes or edges are selected (e.g. by direct mouse clicking or by drag-selecting).</li>
+        <li><code>deselect</code>:</strong> For events dispatched after nodes or edges are unselected.</li>
+        <li><code>filter</code>:</strong> For events dispatched after nodes or edges are filtered.</li>
+        <li><code>zoom</code>:</strong> For events dispatched after the network is rescaled.</li>
+        <li><code>layout</code>:</strong> For events dispatched after a new layout is applied or the current one is recomputed.</li>
+        <li><code>contextmenu</code>:</strong> For events dispatched after a right-click context menu item is selected.
+                                                       You cannot use this type with the listener methods (e.g. <a href="visualization#section/addListener">org.cytoscapeweb.Visualization :: addListener</a>).
+                                                       Events of this type are only dispatched to the callback functions that are registered with
+                                                       <a href="visualization#section/addContextMenuItem">org.cytoscapeweb.Visualization :: addContextMenuItem</a>.</li>
+        <li><code>error</code>:</strong> For events dispatched when an internal error or exception occurs.</li></ul></div><div class="details"><label>See Also</label><ul class="see_also"><li><a href="visualization#section/addListener">org.cytoscapeweb.Visualization :: addListener</a></li><li><a href="visualization#section/hasListener">org.cytoscapeweb.Visualization :: hasListener</a></li><li><a href="visualization#section/removeListener">org.cytoscapeweb.Visualization :: removeListener</a></li><li><a href="visualization#section/addContextMenuItem">org.cytoscapeweb.Visualization :: addContextMenuItem</a></li></ul></div><h1 id="Error" name="Error">Error</h1><div class="description"><p>This object represents an Error type, but is just an untyped object.</p>
+<p>It is returned by <code>"error"</code> type events.</p></div><div class="details"><label>Fields</label><div class="fields"><div class="field"><p><em>id</em> <span class="type">{String}</span> : The error id.</p></div><div class="field"><p><em>msg</em> <span class="type">{String}</span> : The error message.</p></div><div class="field"><p><em>name</em> <span class="type">{String}</span> : The error name.</p></div><div class="field"><p><em>stackTrace</em> <span class="type">{String}</span> : The stack trace of the error.</p></div></div><label>See Also</label><ul class="see_also"><li><a class="class_link direct" href="events#section/EventType">EventType</a></li><li><a class="class_link direct" href="events#section/Event">Event</a></li><li><a href="visualization#section/addListener">org.cytoscapeweb.Visualization :: addListener</a></li></ul></div></div>
+
+
+	        </div>
+	        <!-- end page content -->
+        </div> 
+	
+        <div id="footer" class="slice">
+            <p>
+                Cytoscape Web development is funded by <a href="http://www.genomecanada.ca">Genome Canada</a>, through the
+                <a href="http://www.ontariogenomics.ca/">Ontario Genomics Institute</a> (2007-OGI-TD-05).</p>
+			<p>
+				Funding for <a href="http://www.cytoscape.org">Cytoscape</a> is provided by a federal grant from the U.S. 
+				<a href="http://www.nigms.nih.gov">National Institute of General Medical Sciences (NIGMS)</a> 
+				of the <a href="http://www.nih.gov">National Institutes of Health (NIH)</a> under award 
+				number GM070743-01 and the U.S. <a href="http://www.nsf.gov">National Science Foundation (NSF)</a>.
+			</p>
+			<p>
+		  		<a href="http://www.systemsbiology.org"> ISB </a> | 
+		  		<a href="http://www.ucsd.edu"> UCSD </a> | 
+		  		<a href="http://cbio.mskcc.org"> MSKCC </a> | 
+		  		<a href="http://www.pasteur.fr"> Pasteur </a> | 
+		  		<a href="http://www.agilent.com/"> Agilent </a> | 
+		  		<a href="http://www.ucsf.edu/"> UCSF </a> |
+				<a href="http://www.unilever.com"> Unilever </a> |
+				<a href="http://www.utoronto.ca"> Toronto </a> |
+				<a href="http://portal.ncibi.org/gateway/index.html"> NCIBI </a>
+		  	</p>
+
+			<p>
+				&copy; 
+	            2009&ndash;2020            	Cytoscape Consortium
+        	</p>
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html>
+    <head>
+            
+        <title>Cytoscape Web &#187; Tutorial</title>
+        
+        <link rel="shortcut icon" href="../img/layout/favicon.png" />
+        <meta name="keywords" content="Cytoscape, Cytoscape Web, visualization, interaction network, graph, bioinformatics, computational biology, pathways">
+        
+        
+        <link rel="stylesheet" type="text/css" href="../css/layout.css" />
+<link rel="stylesheet" type="text/css" href="../css/content.css" />
+<link rel="stylesheet" type="text/css" href="../css/content/tutorial.css" />
+        
+        <!--[if IE]>
+                <![endif]-->
+        
+        <script type="text/javascript" src="../js/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery/plugins/jquery.qtip-1.0.0-rc3.min.js"></script>
+<script type="text/javascript" src="../js/layout/layout.js"></script>
+<script type="text/javascript" src="../js/jquery/plugins/chili/jquery.chili-2.2.js"></script>
+<script type="text/javascript" src="../js/jquery/plugins/chili/recipes.js"></script>
+<script type="text/javascript" src="../js/layout/side.js"></script>
+<script type="text/javascript" src="../js/util/ga.js"></script>
+        
+        <!--[if IE]>
+                <![endif]-->
+
+        
+        	</head>
+	
+    <body>
+	
+        <div id="header" class="slice">
+            <a href="../index.html" title="Home"><div id="logo">Cytoscape Web</div></a>
+            
+            <div id="navigation_links">
+                <ul>
+                    <li><a href="../download">Download</a></li>
+<li class="selected" ><a href="../tutorial">Tutorial</a></li>
+<li><a href="../faq">FAQ</a></li>
+<li><a href="../documentation">Documentation</a></li>
+<li><a href="../demos">Demos</a></li>
+<li><a href="../about">About</a></li>
+<li><a href="../contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <form action="http://www.google.com/cse" id="cse-search-box">
+                <input type="hidden" name="cx" value="016016542103382164689:dyea8plfovk" />
+                <input type="hidden" name="ie" value="UTF-8" />
+                <div id="search">
+                        <div id="search_input">
+                            <input type="text" name="q" size="25" value="Search this site via Google" />
+                        </div>
+                        <button id="search_button" name="sa"></button>
+                </div>
+            </form>
+            
+        </div>
+		  
+        <div id="page" class="slice">
+            
+            <div id="cytoscapejs_note" class="slice">
+                <p>
+                    <img class="cytoscapejs_note_icon1" src="../img/icons/triangle38.png"></img>
+                    <img class="cytoscapejs_note_icon2" src="../img/icons/triangle38.png"></img>
+                    This project has been replaced by <strong><a href="http://js.cytoscape.org">Cytoscape.js</a></strong>, 
+                    and is no longer active.
+                </p>
+            </div>
+            
+                        
+            <!-- begin page content -->
+            <div id="content" class="side">
+            
+            <div class="right"><div class="nav"></div></div><div class="left">
+    
+    <h1>Introduction</h1>
+    
+    <p>This tutorial guides you through the process of getting Cytoscape Web up and running within
+    a HTML page.  Once you have Cytoscape Web working, you can continue on in the tutorial to see
+    how to interact with Cytoscape Web.  Additionally, visual styles are presented as a more
+    complex example of how to interact with Cytoscape Web.</p>
+
+
+
+
+    <h1>Getting started</h1>
+    
+    
+    <h2>What you need</h2>
+    
+    <p>All the files you need are in the latest version of the Cytoscape Web distribution archive.
+    <a href="../download#now">Get the latest version of the archive</a>, and extract the files.</p>
+    
+    <p>When opening the examples as a local files in your browser, you may not be able to see
+    Cytoscape Web.  This is due to Flash security settings.  Make sure to allow Flash to run
+    from the local filesystem (<code>file://*</code>) in the 
+    <a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html">security settings panel</a>.
+      You do not need to change the security settings if you deploy Cytoscape Web on a web server, 
+      such as Apache.</p>
+    
+    <img src="../img/content/tutorial/flash_security.png" />
+    
+    <h2>What to do</h2>
+    
+    <p>The best way to familiarise yourself with setting up Cytoscape Web is to go through an
+    example.</p>
+    
+    <p>It is important to note that Cytoscape Web does not load remote files for you.  So if you
+    have a graph file you want to load from a server, you must load the file into a
+    <code>string</code>, either by hardcoding the graph into your code or loading the graph file via
+    AJAX first.  We recommend you take a look at <a href="http://jquery.com" rel="external">jQuery</a>.
+    It makes Javascript <em>really</em> easy, especially
+    <a href="http://docs.jquery.com/Ajax" rel="external">AJAX</a>.</p>
+    
+    <p>Now, take a look at this example.  It has everything needed to get Cytoscape Web up and
+    running.</p>
+    
+    <div class="code"><pre class="ln-"><code class="html">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;
+&lt;html&gt;
+    
+    &lt;head&gt;
+        &lt;title&gt;Cytoscape Web example&lt;/title&gt;
+        
+        &lt;!-- JSON support for IE (needed to use JS API) --&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/json2.min.js"&gt;&lt;/script&gt;
+        
+        &lt;!-- Flash embedding utility (needed to embed Cytoscape Web) --&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/AC_OETags.min.js"&gt;&lt;/script&gt;
+        
+        &lt;!-- Cytoscape Web JS API (needed to reference org.cytoscapeweb.Visualization) --&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/cytoscapeweb.min.js"&gt;&lt;/script&gt;
+        
+        &lt;script type="text/javascript"&gt;
+            window.onload=function() {
+                // id of Cytoscape Web container div
+                var div_id = "cytoscapeweb";
+                
+                // you could also use other formats (e.g. GraphML) or grab the network data via AJAX
+                var networ_json = {
+                    data: {
+                        nodes: [ { id: "1" }, { id: "2" } ],
+                        edges: [ { id: "2to1", target: "1", source: "2" } ]
+                    }
+                };
+                
+                // initialization options
+                var options = {
+                    // where you have the Cytoscape Web SWF
+                    swfPath: "/swf/CytoscapeWeb",
+                    // where you have the Flash installer SWF
+                    flashInstallerPath: "/swf/playerProductInstall"
+                };
+                
+                // init and draw
+                var vis = new org.cytoscapeweb.Visualization(div_id, options);
+                vis.draw({ network: networ_json });
+            };
+        &lt;/script&gt;
+        
+        &lt;style&gt;
+            /* The Cytoscape Web container must have its dimensions set. */
+            html, body { height: 100%; width: 100%; padding: 0; margin: 0; }
+            #cytoscapeweb { width: 100%; height: 100%; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    
+    &lt;body&gt;
+        &lt;div id="cytoscapeweb"&gt;
+            Cytoscape Web will replace the contents of this div with your graph.
+        &lt;/div&gt;
+    &lt;/body&gt;
+    
+&lt;/html&gt;</code></pre></div>    
+    <p>The code above is embedded below.  If you are following along, you can copy and paste the
+    code above and adjust the <code>script</code> tag references to the path where you extracted
+    Cytoscape Web.  When loaded in your browser, the file you would have made would look just
+    like the embedded code below.</p>
+    
+    <iframe src="../file/example_code/getting_started.html"></iframe>    
+
+
+
+    
+    <h1>Interacting with Cytoscape Web</h1>
+    
+    <p>Now that you are able to embed Cytoscape Web into a page, you can use the Javascript API to
+    interact with it.  You have already used the class representing the
+    <a href="../documentation/visualization">embedded visualisation</a> in the
+    first example.  What remains is to interact with the visualisation once it has been drawn.</p>
+    
+    <p>The main thing to keep in mind is that you can not interact with most of Cytoscape Web
+    until the graph is drawn.  Thus, you can interact with Cytoscape Web by using the
+    <a href="../documentation/visualization#section/ready">ready</a> callback function, which is called
+    when Cytoscape Web is finished drawing the graph.</p>
+    
+    <p>This example interacts with Cytoscape Web by getting attributes values that were set for the
+    nodes and edges in the graph.  This is achieved by registering with the
+    <a href="../documentation/visualization#section/addListener">addListener</a> function for click events.</p>
+    
+    <div class="code"><pre class="ln-"><code class="html">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;
+&lt;html&gt;
+    
+    &lt;head&gt;
+        &lt;title&gt;Cytoscape Web example&lt;/title&gt;
+        
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/json2.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/AC_OETags.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/cytoscapeweb.min.js"&gt;&lt;/script&gt;
+        
+        &lt;script type="text/javascript"&gt;
+            window.onload = function() {
+                // id of Cytoscape Web container div
+                var div_id = "cytoscapeweb";
+                
+                // create a network model object
+                var network_json = {
+                        // you need to specify a data schema for custom attributes!
+                        dataSchema: {
+                    		nodes: [ { name: "label", type: "string" },
+                    		         { name: "foo", type: "string" }
+           		         	],
+							edges: [ { name: "label", type: "string" },
+							         { name: "bar", type: "string" }
+							]
+                    	},
+                    	// NOTE the custom attributes on nodes and edges
+                        data: {
+                            nodes: [ { id: "1", label: "1", foo: "Is this the real life?" },
+                                     { id: "2", label: "2", foo: "Is this just fantasy?" }
+                            ],
+                            edges: [ { id: "2to1", target: "1", source: "2", label: "2 to 1", bar: "Caught in a landslide..." }
+                            ]
+                        }
+                };
+                
+                // initialization options
+                var options = {
+                    swfPath: "/swf/CytoscapeWeb",
+                    flashInstallerPath: "/swf/playerProductInstall"
+                };
+                
+                var vis = new org.cytoscapeweb.Visualization(div_id, options);
+                
+                // callback when Cytoscape Web has finished drawing
+                vis.ready(function() {
+                
+                    // add a listener for when nodes and edges are clicked
+                    vis.addListener("click", "nodes", function(event) {
+                        handle_click(event);
+                    })
+                    .addListener("click", "edges", function(event) {
+                        handle_click(event);
+                    });
+                    
+                    function handle_click(event) {
+                         var target = event.target;
+                         
+                         clear();
+                         print("event.group = " + event.group);
+                         for (var i in target.data) {
+                            var variable_name = i;
+                            var variable_value = target.data[i];
+                            print( "event.target.data." + variable_name + " = " + variable_value );
+                         }
+                    }
+                    
+                    function clear() {
+                        document.getElementById("note").innerHTML = "";
+                    }
+                
+                    function print(msg) {
+                        document.getElementById("note").innerHTML += "&lt;p&gt;" + msg + "&lt;/p&gt;";
+                    }
+                });
+
+                // draw options
+                var draw_options = {
+                    // your data goes here
+                    network: network_json,
+                    // hide pan zoom
+                    panZoomControlVisible: false 
+                };
+                
+                vis.draw(draw_options);
+            };
+        &lt;/script&gt;
+        
+        &lt;style&gt;
+            * { margin: 0; padding: 0; font-family: Helvetica, Arial, Verdana, sans-serif; }
+            html, body { height: 100%; width: 100%; padding: 0; margin: 0; }
+            body { line-height: 1.5; color: #000000; font-size: 14px; }
+            /* The Cytoscape Web container must have its dimensions set. */
+            #cytoscapeweb { width: 100%; height: 50%; }
+            #note { width: 100%; height: 50%; background-color: #f0f0f0; overflow: auto;  }
+            p { padding: 0 0.5em; margin: 0; }
+            p:first-child { padding-top: 0.5em; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    
+    &lt;body&gt;
+        &lt;div id="cytoscapeweb"&gt;
+            Cytoscape Web will replace the contents of this div with your graph.
+        &lt;/div&gt;
+        &lt;div id="note"&gt;
+            &lt;p&gt;Click nodes or edges.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    
+&lt;/html&gt;</code></pre></div>    
+    <iframe src="../file/example_code/interacting.html"></iframe>    
+    <p>Now that you know how to initialise and interact with Cytoscape Web, you can look to the
+    <a href="../documentation/visualization">API reference</a> to customise
+    Cytoscape Web exactly to your liking.  Have fun!</p>
+    
+    <p>If you would like a bit more in the way of instruction, see the next section on how to
+    set the visual style.  The example there is a bit more complex, but it should give you the
+    opportunity to become more familiar with the Cytoscape Web API.</p>
+    
+    
+    <h1>Visual styles</h1>
+    
+    <p>Visual styles configure the way that the graph is visually displayed.  You can create a
+    visual style statically or programattically, by setting the visual style at initialisation or
+    by using the <a href="../documentation#section/visualStyle">visualStyle</a> function.</p>
+    
+    <p>This example changes the visual style of the graph from the previous examples.</p>
+    
+    <div class="code"><pre class="ln-"><code class="html">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;
+&lt;html&gt;
+    
+    &lt;head&gt;
+        &lt;title&gt;Cytoscape Web example&lt;/title&gt;
+        
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/json2.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/AC_OETags.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/cytoscapeweb.min.js"&gt;&lt;/script&gt;
+        
+        &lt;script type="text/javascript"&gt;
+            window.onload = function() {
+                // id of Cytoscape Web container div
+                var div_id = "cytoscapeweb";
+                
+                // NOTE: - the attributes on nodes and edges
+                //       - it also has directed edges, which will automatically display edge arrows
+                var xml = '\
+                &lt;graphml&gt;\
+                  &lt;key id="label" for="all" attr.name="label" attr.type="string"/&gt;\
+                  &lt;key id="weight" for="node" attr.name="weight" attr.type="double"/&gt;\
+                  &lt;graph edgedefault="directed"&gt;\
+                    &lt;node id="1"&gt;\
+                        &lt;data key="label"&gt;A&lt;/data&gt;\
+                        &lt;data key="weight"&gt;2.0&lt;/data&gt;\
+                    &lt;/node&gt;\
+                    &lt;node id="2"&gt;\
+                        &lt;data key="label"&gt;B&lt;/data&gt;\
+                        &lt;data key="weight"&gt;1.5&lt;/data&gt;\
+                    &lt;/node&gt;\
+                    &lt;node id="3"&gt;\
+                        &lt;data key="label"&gt;C&lt;/data&gt;\
+                        &lt;data key="weight"&gt;1.0&lt;/data&gt;\
+                    &lt;/node&gt;\
+                    &lt;edge source="1" target="2"&gt;\
+                        &lt;data key="label"&gt;A to B&lt;/data&gt;\
+                    &lt;/edge&gt;\
+                    &lt;edge source="1" target="3"&gt;\
+                        &lt;data key="label"&gt;A to C&lt;/data&gt;\
+                    &lt;/edge&gt;\
+                  &lt;/graph&gt;\
+                &lt;/graphml&gt;\
+                ';
+                
+                function rand_color() {
+                    function rand_channel() {
+                        return Math.round( Math.random() * 255 );
+                    }
+                    
+                    function hex_string(num) {
+                        var ret = num.toString(16);
+                        
+                        if (ret.length &lt; 2) {
+                            return "0" + ret;
+                        } else {
+                            return ret;
+                        }
+                    }
+                    
+                    var r = rand_channel();
+                    var g = rand_channel();
+                    var b = rand_channel();
+                    
+                    return "#" + hex_string(r) + hex_string(g) + hex_string(b); 
+                }
+                
+                // visual style we will use
+                var visual_style = {
+                    global: {
+                        backgroundColor: "#ABCFD6"
+                    },
+                    nodes: {
+                        shape: "OCTAGON",
+                        borderWidth: 3,
+                        borderColor: "#ffffff",
+                        size: {
+                            defaultValue: 25,
+                            continuousMapper: { attrName: "weight", minValue: 25, maxValue: 75 }
+                        },
+                        color: {
+                            discreteMapper: {
+                                attrName: "id",
+                                entries: [
+                                    { attrValue: 1, value: "#0B94B1" },
+                                    { attrValue: 2, value: "#9A0B0B" },
+                                    { attrValue: 3, value: "#dddd00" }
+                                ]
+                            }
+                        },
+                        labelHorizontalAnchor: "center"
+                    },
+                    edges: {
+                        width: 3,
+                        color: "#0B94B1"
+                    }
+                };
+                
+                // initialization options
+                var options = {
+                    swfPath: "/swf/CytoscapeWeb",
+                    flashInstallerPath: "/swf/playerProductInstall"
+                };
+                
+                var vis = new org.cytoscapeweb.Visualization(div_id, options);
+                
+                vis.ready(function() {
+                    // set the style programmatically
+                    document.getElementById("color").onclick = function(){
+                        visual_style.global.backgroundColor = rand_color();
+                        vis.visualStyle(visual_style);
+                    };
+                });
+
+                var draw_options = {
+                    // your data goes here
+                    network: xml,
+                    
+                    // show edge labels too
+                    edgeLabelsVisible: true,
+                    
+                    // let's try another layout
+                    layout: "Tree",
+                    
+                    // set the style at initialisation
+                    visualStyle: visual_style,
+                    
+                    // hide pan zoom
+                    panZoomControlVisible: false 
+                };
+                
+                vis.draw(draw_options);
+            };
+        &lt;/script&gt;
+        
+        &lt;style&gt;
+            * { margin: 0; padding: 0; font-family: Helvetica, Arial, Verdana, sans-serif; }
+            html, body { height: 100%; width: 100%; padding: 0; margin: 0; background-color: #f0f0f0; }
+            body { line-height: 1.5; color: #000000; font-size: 14px; }
+            /* The Cytoscape Web container must have its dimensions set. */
+            #cytoscapeweb { width: 100%; height: 80%; }
+            #note { width: 100%; text-align: center; padding-top: 1em; }
+            .link { text-decoration: underline; color: #0b94b1; cursor: pointer; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    
+    &lt;body&gt;
+        &lt;div id="cytoscapeweb"&gt;
+            Cytoscape Web will replace the contents of this div with your graph.
+        &lt;/div&gt;
+        &lt;div id="note"&gt;
+            &lt;span class="link" id="color"&gt;Color me surprised&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    
+&lt;/html&gt;</code></pre></div>    
+    <p>The style is set at initialisation.  Additionally, clicking the link changes the visual
+    style programattically by changing the background color to a randomly selected color for
+    each click.</p>
+    
+    <iframe src="../file/example_code/style.html"></iframe>    
+    <p>This example has used only a few visual properties for the sake of simplicity.  However,
+    there are many visual properties that exist in Cytoscape Web that can be used to control
+    exactly how things are visually displayed.  Take a look at the
+    <a href="../documentation#section/visualStyle">visualStyle</a>
+    function for more information.</p>
+    
+    
+    
+    
+    <h1>Compound Nodes</h1>
+    
+    <p>With Cytoscape Web it is very easy to create compound nodes (i.e. nodes within nodes), and you can choose one of the folowing options:
+    	<ol>
+    		<li><a href="http://www.cs.rpi.edu/research/groups/pb/punin/public_html/XGMML/draft-xgmml-20010628.html#NodeA" rel="external">XGMML</a>: 
+                This XML format supports subgraphs by allowing <code>&lt;graph&gt;</code> tags to be nested into a node's <code>&lt;att&gt;</code> tag.</li>
+    		<li><a href="http://graphml.graphdrawing.org/primer/graphml-primer.html#Nested" rel="external">GraphML</a>: also supports nested graphs.</li>
+    		<li><a href="../documentation/elements#section/NetworkModel">NetworkModel</a>: Cytoscape Web's native format is a simple option.
+    		    You just need to set the parent node ID in the nodes' data, like in the example bellow.</li>
+    		<li>At any moment, you can create compound nodes by <a href="../documentation/visualization#section/addNode">adding new nodes</a> to another node.</li>
+    	</ol>
+    </p>
+    
+    <div class="code"><pre class="ln-"><code class="html">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;
+&lt;html&gt;
+    
+    &lt;head&gt;
+        &lt;title&gt;Cytoscape Web example&lt;/title&gt;
+        
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/json2.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/AC_OETags.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="..//js/cytoscape_web/cytoscapeweb.min.js"&gt;&lt;/script&gt;
+        
+        &lt;script type="text/javascript"&gt;
+            window.onload = function() {
+                // id of Cytoscape Web container div
+                var div_id = "cytoscapeweb";
+                
+                var network_json = {
+                        // NOTE the parent attribute
+                        data: {
+                            nodes: [ { id: "1" },
+                                     { id: "2", parent: "1" },
+                                     { id: "3", parent: "1" },
+                                     { id: "4", parent: "2" },
+                                     { id: "5", parent: "6" },
+                                     { id: "6" },
+                                     { id: "7" },
+                                     { id: "8", parent: "1" }
+                            ],
+                            edges: [ 
+                                    { target: "3", source: "5" },
+                                    { target: "3", source: "8" },
+                                    { target: "2", source: "7" }
+                            ]
+                        }
+                };
+                
+                // NOTE the "compound" prefix in some visual properties
+                var visual_style = {
+                    nodes: {
+                        shape: "DIAMOND",
+                        compoundShape: "RECTANGLE",
+                        label: { passthroughMapper: { attrName: "id" } } ,
+                        compoundLabel: { passthroughMapper: { attrName: "id" } } ,
+                        borderWidth: 2,
+                        compoundBorderWidth: 1,
+                        borderColor: "#666666",
+                        compoundBorderColor: "#999999",
+                        size: 25,
+                        color: "#ffffff",
+                        compoundColor: "#eaeaea"
+                    }
+                };
+                
+                // initialization options
+                var options = {
+                    swfPath: "/swf/CytoscapeWeb",
+                    flashInstallerPath: "/swf/playerProductInstall"
+                };
+                
+                var vis = new org.cytoscapeweb.Visualization(div_id, options);
+
+                vis.ready(function() {
+                    // set the style programmatically
+                    document.getElementById("layout").onclick = function(){
+                        vis.layout("CompoundSpringEmbedder");
+                    };
+                });
+                
+                var draw_options = {
+                    // your data goes here
+                    network: network_json,
+                    // this is the best layout to use when the network has compound nodes 
+                    layout: "CompoundSpringEmbedder",
+                    // set the style at initialisation
+                    visualStyle: visual_style,
+                    // hide pan zoom
+                    panZoomControlVisible: false 
+                };
+                
+                vis.draw(draw_options);
+            };
+        &lt;/script&gt;
+        
+        &lt;style&gt;
+            * { margin: 0; padding: 0; font-family: Helvetica, Arial, Verdana, sans-serif; }
+            html, body { height: 100%; width: 100%; padding: 0; margin: 0; background-color: #f0f0f0; }
+            body { line-height: 1.5; color: #000000; font-size: 14px; }
+            /* The Cytoscape Web container must have its dimensions set. */
+            #cytoscapeweb { width: 100%; height: 90%; }
+            #note { width: 100%; text-align: center; padding-top: 0.5em; }
+            .link { text-decoration: underline; color: #0b94b1; cursor: pointer; }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    
+    &lt;body&gt;
+        &lt;div id="cytoscapeweb"&gt;
+            Cytoscape Web will replace the contents of this div with your graph.
+        &lt;/div&gt;
+        &lt;div id="note"&gt;
+            &lt;span class="link" id="layout"&gt;Recalculate layout&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    
+&lt;/html&gt;</code></pre></div>    <iframe src="../file/example_code/compound_nodes.html"></iframe>    
+    <p>To learn more about how to work with compound nodes, take a look at these related API functions and options:
+    	<ul>
+    		<li><a href="../documentation/visualization#section/addElements">addElements()</a></li>
+    		<li><a href="../documentation/visualization#section/nodes">nodes()</a></li>
+    		<li><a href="../documentation/visualization#section/parentNodes">parentNodes()</a></li>
+    		<li><a href="../documentation/visualization#section/childNodes">childNodes()</a></li>
+    		<li><code>CompoundSpringEmbedder</code> <a href="../documentation/layout">layout</a></li>
+    	</ul>
+    </p>
+    
+    <p>You can also play with the <a href="../demos/compound">compound nodes demo</a>.</p>
+    
+    
+    
+    
+    <h1>Conclusion</h1>
+    
+    <p>This tutorial should allow you to have Cytoscape Web up and running and interacting with
+    other components in your page.  You should now be sufficiently capable of using the
+    <a href="../documentation/visualization">API reference</a> to customise Cytoscape Web to your
+    specific needs.</p>
+    
+    <p>If you still have questions, take a look at the <a href="../faq">FAQ</a>.  Most likely,
+    your question has already been answered there.</p>
+    
+</div>
+	        </div>
+	        <!-- end page content -->
+        </div> 
+	
+        <div id="footer" class="slice">
+            <p>
+                Cytoscape Web development is funded by <a href="http://www.genomecanada.ca">Genome Canada</a>, through the
+                <a href="http://www.ontariogenomics.ca/">Ontario Genomics Institute</a> (2007-OGI-TD-05).</p>
+			<p>
+				Funding for <a href="http://www.cytoscape.org">Cytoscape</a> is provided by a federal grant from the U.S. 
+				<a href="http://www.nigms.nih.gov">National Institute of General Medical Sciences (NIGMS)</a> 
+				of the <a href="http://www.nih.gov">National Institutes of Health (NIH)</a> under award 
+				number GM070743-01 and the U.S. <a href="http://www.nsf.gov">National Science Foundation (NSF)</a>.
+			</p>
+			<p>
+		  		<a href="http://www.systemsbiology.org"> ISB </a> | 
+		  		<a href="http://www.ucsd.edu"> UCSD </a> | 
+		  		<a href="http://cbio.mskcc.org"> MSKCC </a> | 
+		  		<a href="http://www.pasteur.fr"> Pasteur </a> | 
+		  		<a href="http://www.agilent.com/"> Agilent </a> | 
+		  		<a href="http://www.ucsf.edu/"> UCSF </a> |
+				<a href="http://www.unilever.com"> Unilever </a> |
+				<a href="http://www.utoronto.ca"> Toronto </a> |
+				<a href="http://portal.ncibi.org/gateway/index.html"> NCIBI </a>
+		  	</p>
+
+			<p>
+				&copy; 
+	            2009&ndash;2020            	Cytoscape Consortium
+        	</p>
+        </div>
+
+    </body>
+
+</html>
